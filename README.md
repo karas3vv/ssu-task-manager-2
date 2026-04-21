@@ -1,8 +1,8 @@
 # TaskFlow
 
-TaskFlow is a task-manager project built with Next.js, TypeScript, FSD architecture, MobX and axios. The app demonstrates public SSR pages, protected dashboard pages, client-side state management, typed API routes, i18n, metadata/SEO setup and theme switching.
+TaskFlow — учебный task-manager проект, разработанный на Next.js, TypeScript, FSD-архитектуре, MobX и axios. Приложение демонстрирует публичные SSR-страницы, защищенную dashboard-зону, клиентское управление состоянием, типизированные API routes, i18n, SEO/metadata-настройки и переключение темы.
 
-## Stack
+## Стек
 
 - Next.js App Router
 - TypeScript
@@ -10,38 +10,38 @@ TaskFlow is a task-manager project built with Next.js, TypeScript, FSD architect
 - MobX / mobx-react-lite
 - axios
 - next-intl
-- CSS in global layout styles
+- CSS в глобальных стилях layout
 
-## Features
+## Возможности
 
-- Public landing page
-- Login and registration pages
-- Protected dashboard area through middleware
-- Personal profile editing
-- Task creation, editing and status updates
-- Calendar view with task deadlines
-- Project list
-- Team management for owner role
-- Analytics page
-- Settings page with theme switching
-- RU/EN locale structure
-- Metadata, OpenGraph, manifest, robots.txt, sitemap.xml and SchemaOrg
-- Mock API routes for backend-like behavior
+- Публичная landing page
+- Страницы входа и регистрации
+- Защищенная dashboard-зона через middleware
+- Редактирование личного профиля
+- Создание, редактирование и обновление статусов задач
+- Календарь с дедлайнами задач
+- Список проектов
+- Управление командой для роли owner
+- Страница аналитики
+- Страница настроек с переключением темы
+- Структура локалей RU/EN
+- Metadata, OpenGraph, manifest, robots.txt, sitemap.xml и SchemaOrg
+- Mock API routes для имитации backend-поведения
 
-## Architecture
+## Архитектура
 
-The project follows FSD-style layering with Next.js App Router:
+Проект использует FSD-подход с учетом Next.js App Router:
 
 ```text
-app/        Next.js routes, layouts, API routes, metadata files
-entities/   Business entities and shared model types
-features/   User-facing feature logic and components
-shared/     API client, config, providers, stores, SEO helpers, UI primitives
-widgets/    Larger page blocks and composed UI sections
-i18n/       next-intl request config and messages
+app/        маршруты Next.js, layouts, API routes, metadata-файлы
+entities/   бизнес-сущности и общие model-типы
+features/   пользовательские фичи, логика и компоненты
+shared/     API-клиент, конфиги, providers, stores, SEO helpers, UI-утилиты
+widgets/    крупные блоки страниц и составные UI-секции
+i18n/       конфигурация next-intl и сообщения переводов
 ```
 
-Path aliases are configured in `tsconfig.json`:
+Алиасы путей настроены в `tsconfig.json`:
 
 ```text
 @app/*
@@ -52,9 +52,9 @@ Path aliases are configured in `tsconfig.json`:
 @widgets/*
 ```
 
-## Pages
+## Страницы
 
-Public pages:
+Публичные страницы:
 
 ```text
 /ru
@@ -63,7 +63,7 @@ Public pages:
 /ru/auth/register
 ```
 
-Protected dashboard pages:
+Защищенные dashboard-страницы:
 
 ```text
 /ru/dashboard
@@ -75,22 +75,22 @@ Protected dashboard pages:
 /ru/dashboard/settings
 ```
 
-Dashboard pages are placed inside the `(dashboard)` route group and use a shared dashboard layout.
+Dashboard-страницы находятся внутри route group `(dashboard)` и используют общий dashboard layout.
 
-## Demo Auth
+## Демо-авторизация
 
-The login form already contains demo credentials:
+Форма входа уже содержит демо-данные:
 
 ```text
 email: demo@taskflow.local
 password: password
 ```
 
-The demo user has the `owner` role, so team management is available on the Team page.
+Демо-пользователь имеет роль `owner`, поэтому на странице команды доступно управление участниками.
 
 ## API Routes
 
-The project uses typed Next.js API routes as a mock backend:
+Проект использует типизированные Next.js API routes как mock backend:
 
 ```text
 POST   /api/auth/login
@@ -120,11 +120,11 @@ DELETE /api/team/[id]
 GET    /api/stats
 ```
 
-All API calls from the client are made through the typed axios client in `shared/api`.
+Все клиентские API-запросы выполняются через типизированный axios-клиент в `shared/api`.
 
 ## MobX Stores
 
-The app uses a root store pattern:
+В приложении используется паттерн root store:
 
 ```text
 RootStore
@@ -136,32 +136,32 @@ TeamStore
 ThemeStore
 ```
 
-`RootStore` collects all stores and is provided through `StoreProvider`.
+`RootStore` собирает все хранилища и передается в приложение через `StoreProvider`.
 
 ## SEO
 
-Implemented SEO-related files and helpers:
+Реализованы SEO-файлы и helpers:
 
-- Metadata per page through `generateMetadata`
-- OpenGraph markup
+- Metadata для страниц через `generateMetadata`
+- OpenGraph-разметка
 - `app/manifest.ts`
 - `app/robots.ts`
 - `app/sitemap.ts`
 - Icon routes
-- SchemaOrg JSON-LD through `next/script`
+- SchemaOrg JSON-LD через `next/script`
 
 ## i18n
 
-The project uses `[locale]` routing and `next-intl`.
+Проект использует `[locale]` routing и `next-intl`.
 
-Supported locales:
+Поддерживаемые локали:
 
 ```text
 ru
 en
 ```
 
-Main files:
+Основные файлы:
 
 ```text
 i18n/messages.ts
@@ -170,57 +170,57 @@ middleware.ts
 shared/config/i18n.ts
 ```
 
-## Theme
+## Тема
 
-The theme is detected from the user's browser preference and can be switched manually on the Settings page.
+Тема определяется по настройкам браузера пользователя и может быть изменена вручную на странице настроек.
 
-## Getting Started
+## Запуск проекта
 
-Install dependencies:
+Установить зависимости:
 
 ```bash
 npm install
 ```
 
-Run development server:
+Запустить dev-сервер:
 
 ```bash
 npm run dev
 ```
 
-Open:
+Открыть:
 
 ```text
 http://localhost:3000/ru
 ```
 
-Build production version:
+Собрать production-версию:
 
 ```bash
 npm run build
 ```
 
-Run production server:
+Запустить production-сервер:
 
 ```bash
 npm run start
 ```
 
-Type-check the project:
+Проверить типы:
 
 ```bash
 npm run test
 ```
 
-## Notes
+## Примечания
 
-The backend is implemented as in-memory mock API routes. Data created during runtime is available while the Next.js server is running. After a full server restart, the mock data returns to its initial state.
+Backend реализован через in-memory mock API routes. Данные, созданные во время работы приложения, доступны пока запущен Next.js сервер. После полного перезапуска сервера mock-данные возвращаются к начальному состоянию.
 
-## Available Scripts
+## Доступные команды
 
 ```bash
-npm run dev     # start development server
-npm run build   # build production bundle
-npm run start   # start production server after build
-npm run test    # run TypeScript check
+npm run dev     # запуск development-сервера
+npm run build   # сборка production-версии
+npm run start   # запуск production-сервера после build
+npm run test    # проверка TypeScript
 ```
