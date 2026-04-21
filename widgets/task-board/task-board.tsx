@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import type * as React from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { CreateTaskPayload, Task, TaskPriority, TaskStatus } from "@entities/task/model";
 import { projects, users } from "@shared/api/mock-db";
@@ -34,7 +35,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
     return <p className="muted">Задачи загружаются...</p>;
   }
 
-  async function handleCreateTask(event: FormEvent<HTMLFormElement>): Promise<void> {
+  async function handleCreateTask(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
     await taskStore.createTask(form);
 
@@ -65,7 +66,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
     setEditForm(null);
   }
 
-  async function handleUpdateTask(event: FormEvent<HTMLFormElement>, taskId: string): Promise<void> {
+  async function handleUpdateTask(event: React.FormEvent<HTMLFormElement>, taskId: string): Promise<void> {
     event.preventDefault();
 
     if (editForm === null) {

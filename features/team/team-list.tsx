@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import type * as React from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { CreateTeamMemberPayload, UserProfile, UserRole } from "@entities/user/model";
 import { useRootStore } from "@shared/providers/store-provider";
@@ -48,7 +49,7 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
     return <p className="muted">Команда загружается...</p>;
   }
 
-  async function handleCreateMember(event: FormEvent<HTMLFormElement>): Promise<void> {
+  async function handleCreateMember(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
     await teamStore.createMember(newMember);
 
@@ -77,7 +78,7 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
     setEditMember(null);
   }
 
-  async function handleUpdateMember(event: FormEvent<HTMLFormElement>, memberId: string): Promise<void> {
+  async function handleUpdateMember(event: React.FormEvent<HTMLFormElement>, memberId: string): Promise<void> {
     event.preventDefault();
 
     if (editMember === null) {

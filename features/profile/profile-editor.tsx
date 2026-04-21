@@ -1,6 +1,7 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import type * as React from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { UpdateProfilePayload, UserProfile, UserRole } from "@entities/user/model";
 import { useRootStore } from "@shared/providers/store-provider";
@@ -59,13 +60,13 @@ export const ProfileEditor = observer(function ProfileEditor({
     }));
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
     await authStore.updateProfile(form);
   }
 
   function handleInput(field: keyof Omit<UpdateProfilePayload, "notifications">) {
-    return (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => updateField(field, event.target.value);
+    return (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => updateField(field, event.target.value);
   }
 
   return (

@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import type * as React from "react";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { observer } from "mobx-react-lite";
@@ -25,7 +26,7 @@ export const AuthForm = observer(function AuthForm({ locale, mode }: AuthFormPro
   const t = messages[locale];
   const isRegister = mode === "register";
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
     if (isRegister) {

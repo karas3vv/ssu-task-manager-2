@@ -1,7 +1,7 @@
 "use client";
 
 import { makeAutoObservable, runInAction } from "mobx";
-import { Project } from "@entities/project/model";
+import { CreateProjectPayload, Project, UpdateProjectPayload } from "@entities/project/model";
 import { CreateTaskPayload, Task, UpdateTaskPayload } from "@entities/task/model";
 import { AuthResult, CreateTeamMemberPayload, LoginPayload, RegisterPayload, UpdateProfilePayload, UpdateTeamMemberPayload, UserProfile } from "@entities/user/model";
 import { DashboardStats, taskManagerApi } from "@shared/api/task-manager-api";
@@ -187,6 +187,8 @@ export class ProjectStore {
   projects: Project[] = [];
   status: RequestStatus = "idle";
   error: string | null = null;
+  createStatus: RequestStatus = "idle";
+  createMessage: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -217,6 +219,41 @@ export class ProjectStore {
       runInAction(() => {
         this.error = error instanceof Error ? error.message : "Projects loading failed";
         this.status = "error";
+      });
+    }
+  }
+
+  async createProject(payload: CreateProjectPayload): Promise<void> {
+    this.createStatus = "loading";
+    this.createMessage = null;
+    this.error = null;
+
+    try {
+      const project = await taskManagerApi.createProject(payload);
+      runInAction(() => {
+        this.projects = [project, ...this.projects];
+        this.createStatus = "success";
+        this.createMessage = "Проект добавлен";
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.error = error instanceof Error ? error.message : "Project creation failed";
+        this.createStatus = "error";
+      });
+    }
+  }
+
+  async updateProject(projectId: string, payload: UpdateProjectPayload): Promise<void> {
+    this.error = null;
+
+    try {
+      const updated = await taskManagerApi.updateProject(projectId, payload);
+      runInAction(() => {
+        this.projects = this.projects.map((item) => (item.id === updated.id ? updated : item));
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.error = error instanceof Error ? error.message : "Project update failed";
       });
     }
   }
