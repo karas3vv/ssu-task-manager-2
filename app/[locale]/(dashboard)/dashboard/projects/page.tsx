@@ -1,0 +1,26 @@
+import { projects } from "@shared/api/mock-db";
+import { createMetadata } from "@shared/seo/metadata";
+import { ProjectList } from "@features/tasks/project-list";
+
+type ProjectsPageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: ProjectsPageProps) {
+  const { locale } = await params;
+  return createMetadata(locale, "Проекты", "Список проектов task-manager.");
+}
+
+export default function ProjectsPage(): JSX.Element {
+  return (
+    <>
+      <section className="page-title">
+        <div>
+          <h1>Проекты</h1>
+          <p className="muted">Три рабочих направления с типизированными данными API.</p>
+        </div>
+      </section>
+      <ProjectList initialProjects={projects} />
+    </>
+  );
+}
