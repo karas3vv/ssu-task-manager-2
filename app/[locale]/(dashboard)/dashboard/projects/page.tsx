@@ -17,7 +17,6 @@ export default function ProjectsPage(): JSX.Element {
       <section className="page-title">
         <div>
           <h1>Проекты</h1>
-          <p className="muted">Три рабочих направления с типизированными данными API.</p>
         </div>
       </section>
       <ProjectList initialProjects={projects} />

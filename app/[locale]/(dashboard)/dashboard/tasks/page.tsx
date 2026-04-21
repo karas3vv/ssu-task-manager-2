@@ -19,7 +19,6 @@ export default function TasksPage(): JSX.Element {
       <section className="page-title">
         <div>
           <h1>Задачи</h1>
-          <p className="muted">CSR-компонент сразу получает SSR-данные, а axios остается fallback-слоем MobX.</p>
         </div>
       </section>
       <TaskBoard initialTasks={tasks} />
