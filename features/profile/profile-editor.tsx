@@ -4,6 +4,7 @@ import type * as React from "react";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { UpdateProfilePayload, UserProfile, UserRole } from "@entities/user/model";
+import { getPositionLabel, userRoleLabels } from "@shared/lib/display-labels";
 import { useRootStore } from "@shared/providers/store-provider";
 
 type ProfileEditorProps = {
@@ -16,9 +17,9 @@ type ProfileEditorProps = {
 const avatarColors: string[] = ["#206a5d", "#b85c38", "#4d5f8f", "#7d4f8f", "#2f7d54"];
 
 const roles: Array<{ value: UserRole; label: string }> = [
-  { value: "owner", label: "Владелец" },
-  { value: "manager", label: "Менеджер" },
-  { value: "member", label: "Участник" }
+  { value: "owner", label: userRoleLabels.owner },
+  { value: "manager", label: userRoleLabels.manager },
+  { value: "member", label: userRoleLabels.member }
 ];
 
 export const ProfileEditor = observer(function ProfileEditor({
@@ -150,8 +151,8 @@ export const ProfileEditor = observer(function ProfileEditor({
         </div>
         <h2>{profile.name}</h2>
         <p className="muted">{profile.email}</p>
-        <span className="badge">{profile.role}</span>
-        <p>{profile.position}</p>
+        <span className="badge">{userRoleLabels[profile.role]}</span>
+        <p>{getPositionLabel(profile.position)}</p>
         <p className="muted">{profile.workspaceName}</p>
         <div className="stats profile-stats">
           <div className="stat">

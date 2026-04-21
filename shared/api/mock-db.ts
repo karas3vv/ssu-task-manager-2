@@ -20,7 +20,7 @@ function createInitialDatabase(): MockDatabase {
     email: "demo@taskflow.local",
     role: "owner",
     avatarColor: "#206a5d",
-    position: "Product manager",
+    position: "Продуктовый менеджер",
     workspaceName: "TaskFlow Space",
     notifications: {
       deadlineReminders: true,
@@ -39,7 +39,7 @@ function createInitialDatabase(): MockDatabase {
         email: "anna@taskflow.local",
         role: "manager",
         avatarColor: "#b85c38",
-        position: "Design lead",
+        position: "Дизайн-лид",
         workspaceName: "TaskFlow Space",
         notifications: {
           deadlineReminders: true,
@@ -53,7 +53,7 @@ function createInitialDatabase(): MockDatabase {
         email: "ilya@taskflow.local",
         role: "member",
         avatarColor: "#4d5f8f",
-        position: "Frontend developer",
+        position: "Frontend-разработчик",
         workspaceName: "TaskFlow Space",
         notifications: {
           deadlineReminders: true,

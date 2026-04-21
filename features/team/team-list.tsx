@@ -4,6 +4,7 @@ import type * as React from "react";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { CreateTeamMemberPayload, UserProfile, UserRole } from "@entities/user/model";
+import { getPositionLabel, userRoleLabels } from "@shared/lib/display-labels";
 import { useRootStore } from "@shared/providers/store-provider";
 
 type TeamListProps = {
@@ -13,8 +14,8 @@ type TeamListProps = {
 const avatarColors: string[] = ["#206a5d", "#b85c38", "#4d5f8f", "#7d4f8f", "#2f7d54"];
 
 const memberRoles: Array<{ value: Exclude<UserRole, "owner">; label: string }> = [
-  { value: "manager", label: "Менеджер" },
-  { value: "member", label: "Участник" }
+  { value: "manager", label: userRoleLabels.manager },
+  { value: "member", label: userRoleLabels.member }
 ];
 
 const emptyMemberForm: CreateTeamMemberPayload = {
@@ -206,8 +207,8 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
                 </div>
                 <h3>{user.name}</h3>
                 <p className="muted">{user.email}</p>
-                <p>{user.position}</p>
-                <span className="badge">{user.role}</span>
+                <p>{getPositionLabel(user.position)}</p>
+                <span className="badge">{userRoleLabels[user.role]}</span>
                 {canManageTeam && user.role !== "owner" ? (
                   <div className="card-actions">
                     <button className="button" type="button" onClick={() => startEdit(user)}>

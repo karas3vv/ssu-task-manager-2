@@ -67,14 +67,14 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
           .brand { font-size: 24px; font-weight: 800; color: var(--primary-strong); }
           .nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-          .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; border: 1px solid var(--line); border-radius: 8px; padding: 0 16px; background: var(--surface-strong); color: var(--text); font-weight: 700; }
+          .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; max-width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 10px 16px; background: var(--surface-strong); color: var(--text); font-weight: 700; line-height: 1.2; text-align: center; white-space: normal; }
           .button.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
           .button.danger { color: var(--danger); }
           .hero { min-height: calc(100vh - 32px); display: grid; align-items: center; padding: 20px 0 56px; background: linear-gradient(135deg, rgba(32,106,93,.18), transparent 42%), linear-gradient(315deg, rgba(184,92,56,.16), transparent 40%); }
           .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 44px; align-items: center; }
           .hero h1 { font-size: clamp(48px, 8vw, 92px); line-height: .92; margin: 0 0 22px; letter-spacing: 0; }
           .hero p { font-size: 21px; line-height: 1.55; color: var(--muted); margin: 0 0 28px; max-width: 650px; }
-          .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); padding: 24px; }
+          .panel { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); padding: 24px; }
           .hero-preview { display: grid; gap: 14px; }
           .preview-column { background: var(--surface-strong); border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
           .preview-column h3 { margin: 14px 0 8px; }
@@ -86,7 +86,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           .form { width: min(430px, 100%); display: grid; gap: 14px; }
           .form h1 { margin: 0 0 10px; }
           .field { display: grid; gap: 6px; color: var(--muted); font-weight: 700; }
-          .input { min-height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 0 12px; background: var(--surface-strong); color: var(--text); }
+          .input { width: 100%; min-width: 0; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 0 12px; background: var(--surface-strong); color: var(--text); }
           .textarea { min-height: 92px; padding-top: 10px; resize: vertical; }
           .dashboard-layout { min-height: 100vh; display: grid; grid-template-columns: 260px 1fr; }
           .sidebar { background: var(--surface); border-right: 1px solid var(--line); padding: 24px; position: sticky; top: 0; height: 100vh; }
@@ -96,19 +96,21 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           .content { padding: 28px; }
           .page-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
           .page-title h1 { margin: 0; font-size: 34px; }
-          .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-          .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-          .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
-          .card h2, .card h3 { margin-top: 0; }
+          .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 16px; }
+          .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; }
+          .grid > *, .cards > *, .form-row > * { min-width: 0; }
+          .card { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px; overflow: hidden; }
+          .card h2, .card h3 { margin-top: 0; overflow-wrap: anywhere; }
+          .card p { overflow-wrap: anywhere; }
           .muted { color: var(--muted); }
-          .badge { display: inline-flex; align-items: center; min-height: 28px; padding: 0 10px; border-radius: 999px; background: rgba(32,106,93,.13); color: var(--primary-strong); font-weight: 800; }
+          .badge { display: inline-flex; align-items: center; max-width: 100%; min-height: 28px; padding: 4px 10px; border-radius: 999px; background: rgba(32,106,93,.13); color: var(--primary-strong); font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
           .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
           .task-workspace { display: grid; gap: 18px; }
           .task-form { width: 100%; }
           .team-workspace { display: grid; gap: 18px; }
           .team-form { width: 100%; }
           .edit-task-form { display: grid; gap: 12px; }
-          .card-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+          .card-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
           .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
           .profile-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr); gap: 18px; align-items: start; }
           .profile-form { width: 100%; }

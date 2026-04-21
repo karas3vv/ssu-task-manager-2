@@ -4,6 +4,7 @@ import type * as React from "react";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { CreateProjectPayload, Project, ProjectStatus } from "@entities/project/model";
+import { projectStatusLabels } from "@shared/lib/display-labels";
 import { useRootStore } from "@shared/providers/store-provider";
 
 type ProjectListProps = {
@@ -112,9 +113,9 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
               value={form.status}
               onChange={(event) => setForm((currentForm) => ({ ...currentForm, status: event.target.value as ProjectStatus }))}
             >
-              <option value="active">Активный</option>
-              <option value="paused">На паузе</option>
-              <option value="completed">Завершен</option>
+              <option value="active">{projectStatusLabels.active}</option>
+              <option value="paused">{projectStatusLabels.paused}</option>
+              <option value="completed">{projectStatusLabels.completed}</option>
             </select>
           </label>
         </div>
@@ -168,9 +169,9 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
                         setEditForm((currentForm) => (currentForm === null ? currentForm : { ...currentForm, status: event.target.value as ProjectStatus }))
                       }
                     >
-                      <option value="active">Активный</option>
-                      <option value="paused">На паузе</option>
-                      <option value="completed">Завершен</option>
+                      <option value="active">{projectStatusLabels.active}</option>
+                      <option value="paused">{projectStatusLabels.paused}</option>
+                      <option value="completed">{projectStatusLabels.completed}</option>
                     </select>
                   </label>
                 </div>
@@ -185,7 +186,7 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
               </form>
             ) : (
               <>
-                <span className="badge">{project.status}</span>
+                <span className="badge">{projectStatusLabels[project.status]}</span>
                 <h3>{project.name}</h3>
                 <p className="muted">{project.description}</p>
                 <p>Дедлайн: {project.dueDate}</p>

@@ -13,7 +13,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
       email: payload.email,
       role: "owner",
       avatarColor: "#206a5d",
-      position: "Workspace owner",
+      position: "Владелец пространства",
       workspaceName: "TaskFlow Space",
       notifications: {
         deadlineReminders: true,

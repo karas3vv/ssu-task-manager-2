@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { CreateTaskPayload, Task, TaskPriority, TaskStatus } from "@entities/task/model";
 import { projects, users } from "@shared/api/mock-db";
+import { taskPriorityLabels, taskStatusLabels } from "@shared/lib/display-labels";
 import { useRootStore } from "@shared/providers/store-provider";
 
 type TaskBoardProps = {
@@ -119,9 +120,9 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
               value={form.priority}
               onChange={(event) => setForm((currentForm) => ({ ...currentForm, priority: event.target.value as TaskPriority }))}
             >
-              <option value="low">Низкий</option>
-              <option value="medium">Средний</option>
-              <option value="high">Высокий</option>
+              <option value="low">{taskPriorityLabels.low}</option>
+              <option value="medium">{taskPriorityLabels.medium}</option>
+              <option value="high">{taskPriorityLabels.high}</option>
             </select>
           </label>
         </div>
@@ -205,9 +206,9 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
                         setEditForm((currentForm) => (currentForm === null ? currentForm : { ...currentForm, priority: event.target.value as TaskPriority }))
                       }
                     >
-                      <option value="low">Низкий</option>
-                      <option value="medium">Средний</option>
-                      <option value="high">Высокий</option>
+                      <option value="low">{taskPriorityLabels.low}</option>
+                      <option value="medium">{taskPriorityLabels.medium}</option>
+                      <option value="high">{taskPriorityLabels.high}</option>
                     </select>
                   </label>
                 </div>
@@ -218,10 +219,10 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
                     value={editForm.status}
                     onChange={(event) => setEditForm((currentForm) => (currentForm === null ? currentForm : { ...currentForm, status: event.target.value as TaskStatus }))}
                   >
-                    <option value="todo">К выполнению</option>
-                    <option value="inProgress">В работе</option>
-                    <option value="review">На проверке</option>
-                    <option value="done">Готово</option>
+                    <option value="todo">{taskStatusLabels.todo}</option>
+                    <option value="inProgress">{taskStatusLabels.inProgress}</option>
+                    <option value="review">{taskStatusLabels.review}</option>
+                    <option value="done">{taskStatusLabels.done}</option>
                   </select>
                 </label>
                 <div className="card-actions">
@@ -235,7 +236,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
               </form>
             ) : (
               <>
-                <span className="badge">{task.status}</span>
+                <span className="badge">{taskStatusLabels[task.status]}</span>
                 <h3>{task.title}</h3>
                 <p className="muted">{task.description}</p>
                 <p>Дедлайн: {task.dueDate}</p>
