@@ -127,13 +127,14 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           .success-text { color: var(--primary-strong); font-weight: 800; margin: 0; }
           .calendar-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; align-items: start; }
           .calendar-board { display: grid; grid-template-columns: repeat(7, minmax(132px, 1fr)); gap: 12px; overflow-x: auto; padding-bottom: 6px; }
-          .calendar-day { min-height: 178px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; grid-template-rows: auto 1fr; gap: 12px; }
+          .calendar-day { min-width: 0; min-height: 178px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; grid-template-rows: auto 1fr; gap: 12px; overflow: hidden; }
           .calendar-day.today { border-color: var(--primary); box-shadow: inset 0 0 0 1px var(--primary); }
-          .calendar-day header { display: grid; gap: 4px; }
-          .day-tasks { display: grid; gap: 8px; align-content: start; }
-          .calendar-task { border-left: 4px solid var(--primary); background: var(--surface-strong); border-radius: 8px; padding: 10px; display: grid; gap: 4px; }
-          .calendar-task span { font-weight: 800; }
-          .calendar-task small { color: var(--muted); }
+          .calendar-day header { min-width: 0; display: grid; gap: 4px; }
+          .calendar-day header > * { min-width: 0; overflow-wrap: anywhere; }
+          .day-tasks { min-width: 0; display: grid; gap: 8px; align-content: start; }
+          .calendar-task { min-width: 0; max-width: 100%; border-left: 4px solid var(--primary); background: var(--surface-strong); border-radius: 8px; padding: 10px; display: grid; gap: 4px; overflow: hidden; }
+          .calendar-task span { min-width: 0; font-weight: 800; line-height: 1.25; overflow-wrap: anywhere; }
+          .calendar-task small { min-width: 0; color: var(--muted); line-height: 1.25; overflow-wrap: anywhere; }
           .calendar-task.priority-high { border-left-color: var(--danger); }
           .calendar-task.priority-medium { border-left-color: var(--accent); }
           .calendar-task.priority-low { border-left-color: var(--primary); }
