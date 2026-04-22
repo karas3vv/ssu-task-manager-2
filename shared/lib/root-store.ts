@@ -49,7 +49,7 @@ export class AuthStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Profile update failed";
+        this.error = error instanceof Error ? error.message : "Не удалось обновить профиль";
         this.saveStatus = "error";
       });
     }
@@ -66,7 +66,7 @@ export class AuthStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Login failed";
+        this.error = error instanceof Error ? error.message : "Не удалось войти";
         this.status = "error";
       });
     }
@@ -83,7 +83,7 @@ export class AuthStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Registration failed";
+        this.error = error instanceof Error ? error.message : "Не удалось зарегистрироваться";
         this.status = "error";
       });
     }
@@ -136,7 +136,7 @@ export class TaskStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Tasks loading failed";
+        this.error = error instanceof Error ? error.message : "Не удалось загрузить задачи";
         this.status = "error";
       });
     }
@@ -161,7 +161,7 @@ export class TaskStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Task creation failed";
+        this.error = error instanceof Error ? error.message : "Не удалось создать задачу";
         this.createStatus = "error";
       });
     }
@@ -177,7 +177,7 @@ export class TaskStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Task update failed";
+        this.error = error instanceof Error ? error.message : "Не удалось обновить задачу";
       });
     }
   }
@@ -217,7 +217,7 @@ export class ProjectStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Projects loading failed";
+        this.error = error instanceof Error ? error.message : "Не удалось загрузить проекты";
         this.status = "error";
       });
     }
@@ -237,7 +237,7 @@ export class ProjectStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Project creation failed";
+        this.error = error instanceof Error ? error.message : "Не удалось создать проект";
         this.createStatus = "error";
       });
     }
@@ -253,7 +253,7 @@ export class ProjectStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Project update failed";
+        this.error = error instanceof Error ? error.message : "Не удалось обновить проект";
       });
     }
   }
@@ -282,7 +282,7 @@ export class DashboardStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Stats loading failed";
+        this.error = error instanceof Error ? error.message : "Не удалось загрузить статистику";
         this.status = "error";
       });
     }
@@ -327,7 +327,7 @@ export class TeamStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Team member creation failed";
+        this.error = error instanceof Error ? error.message : "Не удалось добавить участника";
         this.saveStatus = "error";
       });
     }
@@ -347,7 +347,7 @@ export class TeamStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Team member update failed";
+        this.error = error instanceof Error ? error.message : "Не удалось обновить участника";
         this.saveStatus = "error";
       });
     }
@@ -367,7 +367,7 @@ export class TeamStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Team member delete failed";
+        this.error = error instanceof Error ? error.message : "Не удалось удалить участника";
         this.saveStatus = "error";
       });
     }
@@ -387,7 +387,7 @@ export class TeamStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Team loading failed";
+        this.error = error instanceof Error ? error.message : "Не удалось загрузить команду";
         this.status = "error";
       });
     }

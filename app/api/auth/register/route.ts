@@ -25,7 +25,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
 
   const response = NextResponse.json({
     data: result,
-    message: "Registered"
+    message: "Регистрация завершена"
   });
   response.cookies.set("task-manager-session", token, {
     httpOnly: false,

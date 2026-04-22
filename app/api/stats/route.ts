@@ -11,5 +11,5 @@ export async function GET(): Promise<NextResponse<ApiResponse<DashboardStats>>> 
     teamMembers: users.length
   };
 
-  return NextResponse.json({ data, message: "Stats loaded" });
+  return NextResponse.json({ data, message: "Статистика загружена" });
 }

@@ -6,7 +6,7 @@ import { ApiResponse } from "@shared/types/api";
 export async function GET(): Promise<NextResponse<ApiResponse<UserProfile[]>>> {
   return NextResponse.json({
     data: users,
-    message: "Team loaded"
+    message: "Команда загружена"
   });
 }
 
@@ -27,6 +27,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
 
   return NextResponse.json({
     data: member,
-    message: "Team member created"
+    message: "Участник команды создан"
   }, { status: 201 });
 }

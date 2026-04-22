@@ -9,7 +9,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
 
   const response = NextResponse.json({
     data: { user: demoUser, token },
-    message: `Logged in as ${payload.email}`
+    message: `Выполнен вход: ${payload.email}`
   });
   response.cookies.set("task-manager-session", token, {
     httpOnly: false,

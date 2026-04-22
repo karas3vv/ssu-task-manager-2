@@ -7,9 +7,12 @@ type ErrorPageProps = {
 export default function ErrorPage({ reset }: ErrorPageProps): JSX.Element {
   return (
     <main className="not-found">
-      <button className="button primary" type="button" onClick={reset}>
-        Повторить регистрацию
-      </button>
+      <div className="panel">
+        <h1>Ошибка регистрации</h1>
+        <button className="button primary" type="button" onClick={reset}>
+          Повторить регистрацию
+        </button>
+      </div>
     </main>
   );
 }

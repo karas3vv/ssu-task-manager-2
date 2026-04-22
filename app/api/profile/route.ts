@@ -6,7 +6,7 @@ import { ApiResponse } from "@shared/types/api";
 export async function GET(): Promise<NextResponse<ApiResponse<UserProfile>>> {
   return NextResponse.json({
     data: demoUser,
-    message: "Profile loaded"
+    message: "Профиль загружен"
   });
 }
 
@@ -23,6 +23,6 @@ export async function PATCH(request: NextRequest): Promise<NextResponse<ApiRespo
 
   return NextResponse.json({
     data: demoUser,
-    message: "Profile updated"
+    message: "Профиль обновлен"
   });
 }

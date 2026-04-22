@@ -12,7 +12,7 @@ function findProjectIndex(projectId: string): number {
 }
 
 function notFoundResponse(): NextResponse<ApiResponse<null>> {
-  return NextResponse.json({ data: null, message: "Project not found" }, { status: 404 });
+  return NextResponse.json({ data: null, message: "Проект не найден" }, { status: 404 });
 }
 
 export async function PUT(request: NextRequest, context: RouteContext): Promise<NextResponse<ApiResponse<Project | null>>> {
@@ -26,7 +26,7 @@ export async function PUT(request: NextRequest, context: RouteContext): Promise<
   const project: Project = { id, ...payload };
   projects[index] = project;
 
-  return NextResponse.json({ data: project, message: "Project replaced" });
+  return NextResponse.json({ data: project, message: "Проект заменен" });
 }
 
 export async function PATCH(request: NextRequest, context: RouteContext): Promise<NextResponse<ApiResponse<Project | null>>> {
@@ -40,7 +40,7 @@ export async function PATCH(request: NextRequest, context: RouteContext): Promis
   const project: Project = { ...projects[index], ...payload };
   projects[index] = project;
 
-  return NextResponse.json({ data: project, message: "Project updated" });
+  return NextResponse.json({ data: project, message: "Проект обновлен" });
 }
 
 export async function DELETE(_request: NextRequest, context: RouteContext): Promise<NextResponse<ApiResponse<string | null>>> {
@@ -51,5 +51,5 @@ export async function DELETE(_request: NextRequest, context: RouteContext): Prom
   }
 
   const [deletedProject] = projects.splice(index, 1);
-  return NextResponse.json({ data: deletedProject.id, message: "Project deleted" });
+  return NextResponse.json({ data: deletedProject.id, message: "Проект удален" });
 }

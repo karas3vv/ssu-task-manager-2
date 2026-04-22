@@ -12,7 +12,7 @@ function findMemberIndex(memberId: string): number {
 }
 
 function notFoundResponse(): NextResponse<ApiResponse<null>> {
-  return NextResponse.json({ data: null, message: "Team member not found" }, { status: 404 });
+  return NextResponse.json({ data: null, message: "Участник команды не найден" }, { status: 404 });
 }
 
 export async function PATCH(request: NextRequest, context: RouteContext): Promise<NextResponse<ApiResponse<UserProfile | null>>> {
@@ -33,7 +33,7 @@ export async function PATCH(request: NextRequest, context: RouteContext): Promis
 
   return NextResponse.json({
     data: member,
-    message: "Team member updated"
+    message: "Участник команды обновлен"
   });
 }
 
@@ -46,13 +46,13 @@ export async function DELETE(_request: NextRequest, context: RouteContext): Prom
   }
 
   if (users[index].role === "owner") {
-    return NextResponse.json({ data: null, message: "Owner cannot be deleted" }, { status: 403 });
+    return NextResponse.json({ data: null, message: "Владельца нельзя удалить" }, { status: 403 });
   }
 
   const [deletedMember] = users.splice(index, 1);
 
   return NextResponse.json({
     data: deletedMember.id,
-    message: "Team member deleted"
+    message: "Участник команды удален"
   });
 }

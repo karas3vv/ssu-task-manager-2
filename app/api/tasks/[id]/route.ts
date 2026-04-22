@@ -12,7 +12,7 @@ function findTaskIndex(taskId: string): number {
 }
 
 function notFoundResponse(): NextResponse<ApiResponse<null>> {
-  return NextResponse.json({ data: null, message: "Task not found" }, { status: 404 });
+  return NextResponse.json({ data: null, message: "Задача не найдена" }, { status: 404 });
 }
 
 export async function PUT(request: NextRequest, context: RouteContext): Promise<NextResponse<ApiResponse<Task | null>>> {
@@ -26,7 +26,7 @@ export async function PUT(request: NextRequest, context: RouteContext): Promise<
   const task: Task = { id, ...payload };
   tasks[index] = task;
 
-  return NextResponse.json({ data: task, message: "Task replaced" });
+  return NextResponse.json({ data: task, message: "Задача заменена" });
 }
 
 export async function PATCH(request: NextRequest, context: RouteContext): Promise<NextResponse<ApiResponse<Task | null>>> {
@@ -40,7 +40,7 @@ export async function PATCH(request: NextRequest, context: RouteContext): Promis
   const task: Task = { ...tasks[index], ...payload };
   tasks[index] = task;
 
-  return NextResponse.json({ data: task, message: "Task updated" });
+  return NextResponse.json({ data: task, message: "Задача обновлена" });
 }
 
 export async function DELETE(_request: NextRequest, context: RouteContext): Promise<NextResponse<ApiResponse<string | null>>> {
@@ -51,5 +51,5 @@ export async function DELETE(_request: NextRequest, context: RouteContext): Prom
   }
 
   const [deletedTask] = tasks.splice(index, 1);
-  return NextResponse.json({ data: deletedTask.id, message: "Task deleted" });
+  return NextResponse.json({ data: deletedTask.id, message: "Задача удалена" });
 }

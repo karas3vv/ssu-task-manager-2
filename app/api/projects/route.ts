@@ -4,7 +4,7 @@ import { createId, projects } from "@shared/api/mock-db";
 import { ApiResponse } from "@shared/types/api";
 
 export async function GET(): Promise<NextResponse<ApiResponse<Project[]>>> {
-  return NextResponse.json({ data: projects, message: "Projects loaded" });
+  return NextResponse.json({ data: projects, message: "Проекты загружены" });
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse<ApiResponse<Project>>> {
@@ -15,5 +15,5 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
   };
   projects.unshift(project);
 
-  return NextResponse.json({ data: project, message: "Project created" }, { status: 201 });
+  return NextResponse.json({ data: project, message: "Проект создан" }, { status: 201 });
 }
