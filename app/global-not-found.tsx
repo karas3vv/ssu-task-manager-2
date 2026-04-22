@@ -1,3 +1,5 @@
+import { BackButton } from "@shared/ui/back-button";
+
 export default function GlobalNotFound(): JSX.Element {
   return (
     <html lang="ru">
@@ -27,8 +29,8 @@ export default function GlobalNotFound(): JSX.Element {
           >
             <h1 style={{ margin: "0 0 12px", fontSize: 40 }}>404</h1>
             <p style={{ margin: "0 0 18px", color: "#66736d" }}>Страница не найдена.</p>
-            <a
-              href="/ru"
+            <BackButton
+              fallbackHref="/ru/dashboard"
               style={{
                 minHeight: 42,
                 display: "inline-flex",
@@ -38,13 +40,15 @@ export default function GlobalNotFound(): JSX.Element {
                 borderRadius: 8,
                 background: "#206a5d",
                 color: "#fff",
+                cursor: "pointer",
+                font: "inherit",
                 fontWeight: 700,
                 padding: "10px 16px",
                 textDecoration: "none"
               }}
             >
-              На главную
-            </a>
+              Вернуться назад
+            </BackButton>
           </div>
         </main>
       </body>
