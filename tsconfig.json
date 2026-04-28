@@ -15,13 +15,13 @@
     "incremental": true,
     "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./*"],
-      "@app/*": ["./app/*"],
-      "@entities/*": ["./entities/*"],
-      "@features/*": ["./features/*"],
-      "@i18n/*": ["./i18n/*"],
-      "@shared/*": ["./shared/*"],
-      "@widgets/*": ["./widgets/*"]
+      "@/*": ["./src/*"],
+      "@app/*": ["./src/app/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@features/*": ["./src/features/*"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@widgets/*": ["./src/widgets/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
