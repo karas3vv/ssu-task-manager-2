@@ -1,5 +1,5 @@
 import { LandingPage } from "@widgets/landing/landing-page";
-import { resolveLocale } from "@shared/config/i18n";
+import { resolveLocale } from "@share/config/i18n";
 
 type LandingRouteProps = {
   params: Promise<{ locale: string }>;

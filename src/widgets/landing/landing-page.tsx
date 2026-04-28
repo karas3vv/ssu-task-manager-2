@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Locale } from "@shared/config/i18n";
-import { messages } from "@i18n/messages";
+import { Locale } from "@share/config/i18n";
+import { messages } from "@share/i18n/messages";
 
 type LandingPageProps = {
   locale: Locale;

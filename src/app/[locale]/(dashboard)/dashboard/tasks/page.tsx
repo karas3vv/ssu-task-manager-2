@@ -1,5 +1,5 @@
-import { tasks } from "@shared/api/mock-db";
-import { createMetadata } from "@shared/seo/metadata";
+import { tasks } from "@share/api/mock-db";
+import { createMetadata } from "@share/seo/metadata";
 import { TaskBoard } from "@widgets/task-board/task-board";
 
 type TasksPageProps = {

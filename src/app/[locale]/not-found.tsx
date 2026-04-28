@@ -1,4 +1,4 @@
-import { BackButton } from "@shared/ui/back-button";
+import { BackButton } from "@share/ui/back-button";
 
 export default function NotFound(): JSX.Element {
   return (

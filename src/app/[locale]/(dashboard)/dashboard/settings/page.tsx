@@ -1,5 +1,5 @@
-import { createMetadata } from "@shared/seo/metadata";
-import { ThemeSettings } from "@features/theme/theme-settings";
+import { createMetadata } from "@share/seo/metadata";
+import { ThemeSettings } from "@feature/theme/theme-settings";
 
 type SettingsPageProps = {
   params: Promise<{ locale: string }>;

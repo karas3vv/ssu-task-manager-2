@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { resolveLocale } from "@shared/config/i18n";
+import { resolveLocale } from "@share/config/i18n";
 import { DashboardShell } from "@widgets/dashboard-shell/dashboard-shell";
 
 type DashboardLayoutProps = {

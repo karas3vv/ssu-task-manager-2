@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { CreateTaskPayload, Task } from "@entities/task/model";
-import { createId, tasks } from "@shared/api/mock-db";
-import { ApiResponse } from "@shared/types/api";
+import { CreateTaskPayload, Task } from "@share/model/task";
+import { createId, tasks } from "@share/api/mock-db";
+import { ApiResponse } from "@share/types/api";
 
 export async function GET(): Promise<NextResponse<ApiResponse<Task[]>>> {
   return NextResponse.json({ data: tasks, message: "Задачи загружены" });

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { UpdateProfilePayload, UserProfile } from "@entities/user/model";
-import { demoUser } from "@shared/api/mock-db";
-import { ApiResponse } from "@shared/types/api";
+import { UpdateProfilePayload, UserProfile } from "@share/model/user";
+import { demoUser } from "@share/api/mock-db";
+import { ApiResponse } from "@share/types/api";
 
 export async function GET(): Promise<NextResponse<ApiResponse<UserProfile>>> {
   return NextResponse.json({

@@ -1,6 +1,6 @@
-import { projects } from "@shared/api/mock-db";
-import { createMetadata } from "@shared/seo/metadata";
-import { ProjectList } from "@features/tasks/project-list";
+import { projects } from "@share/api/mock-db";
+import { createMetadata } from "@share/seo/metadata";
+import { ProjectList } from "@feature/tasks/project-list";
 
 type ProjectsPageProps = {
   params: Promise<{ locale: string }>;

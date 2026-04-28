@@ -1,6 +1,6 @@
-import { resolveLocale } from "@shared/config/i18n";
-import { AuthForm } from "@features/auth/auth-form";
-import { createMetadata } from "@shared/seo/metadata";
+import { resolveLocale } from "@share/config/i18n";
+import { AuthForm } from "@feature/auth/auth-form";
+import { createMetadata } from "@share/seo/metadata";
 
 type RegisterPageProps = {
   params: Promise<{ locale: string }>;

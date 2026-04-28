@@ -1,10 +1,10 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { ReactNode } from "react";
-import { Locale, locales, resolveLocale } from "@shared/config/i18n";
-import { RootWrapper } from "@shared/providers/root-wrapper";
-import { SchemaOrg } from "@shared/seo/schema-org";
-import { createMetadata } from "@shared/seo/metadata";
+import { Locale, locales, resolveLocale } from "@share/config/i18n";
+import { createMetadata } from "@share/seo/metadata";
+import { AuthWrapper } from "@widgets/wrappers/auth-wrapper";
+import { CommonWrapper } from "@widgets/wrappers/common-wrapper";
 
 type LocaleLayoutProps = {
   children: ReactNode;
@@ -152,9 +152,10 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           }
         `}</style>
         <NextIntlClientProvider messages={messages}>
-          <RootWrapper>{children}</RootWrapper>
+          <CommonWrapper>
+            <AuthWrapper>{children}</AuthWrapper>
+          </CommonWrapper>
         </NextIntlClientProvider>
-        <SchemaOrg locale={locale} />
       </body>
     </html>
   );

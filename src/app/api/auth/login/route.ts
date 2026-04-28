@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { LoginPayload } from "@entities/user/model";
-import { demoUser } from "@shared/api/mock-db";
-import { ApiResponse } from "@shared/types/api";
+import { LoginPayload } from "@share/model/user";
+import { demoUser } from "@share/api/mock-db";
+import { ApiResponse } from "@share/types/api";
 
 export async function POST(request: NextRequest): Promise<NextResponse<ApiResponse<{ user: typeof demoUser; token: string }>>> {
   const payload = (await request.json()) as LoginPayload;

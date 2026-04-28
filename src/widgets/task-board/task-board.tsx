@@ -3,10 +3,10 @@
 import type * as React from "react";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { CreateTaskPayload, Task, TaskPriority, TaskStatus } from "@entities/task/model";
-import { projects, users } from "@shared/api/mock-db";
-import { taskPriorityLabels, taskStatusLabels } from "@shared/lib/display-labels";
-import { useRootStore } from "@shared/providers/store-provider";
+import { CreateTaskPayload, Task, TaskPriority, TaskStatus } from "@share/model/task";
+import { projects, users } from "@share/api/mock-db";
+import { taskPriorityLabels, taskStatusLabels } from "@share/lib/display-labels";
+import { useRootStore } from "@share/providers/store-provider";
 
 type TaskBoardProps = {
   initialTasks: Task[];

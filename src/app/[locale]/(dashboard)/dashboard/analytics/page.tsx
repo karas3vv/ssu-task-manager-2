@@ -1,5 +1,5 @@
-import { projects, tasks } from "@shared/api/mock-db";
-import { createMetadata } from "@shared/seo/metadata";
+import { projects, tasks } from "@share/api/mock-db";
+import { createMetadata } from "@share/seo/metadata";
 
 type AnalyticsPageProps = {
   params: Promise<{ locale: string }>;

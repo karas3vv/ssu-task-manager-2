@@ -1,6 +1,6 @@
-import { users } from "@shared/api/mock-db";
-import { createMetadata } from "@shared/seo/metadata";
-import { TeamList } from "@features/team/team-list";
+import { users } from "@share/api/mock-db";
+import { createMetadata } from "@share/seo/metadata";
+import { TeamList } from "@feature/team/team-list";
 
 type TeamPageProps = {
   params: Promise<{ locale: string }>;
@@ -17,7 +17,7 @@ export default function TeamPage(): JSX.Element {
       <section className="page-title">
         <div>
           <h1>Команда</h1>
-          <p className="muted">Список участников синхронизируется с обновленным профилем через MobX и API.</p>
+          <p className="muted">Список участников синхронизируется с обновленным профилем через store и API.</p>
         </div>
       </section>
       <TeamList initialMembers={users} />

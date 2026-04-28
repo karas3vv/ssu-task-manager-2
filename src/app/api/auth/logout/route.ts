@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { ApiResponse } from "@shared/types/api";
+import { ApiResponse } from "@share/types/api";
 
 export async function POST(): Promise<NextResponse<ApiResponse<boolean>>> {
   const response = NextResponse.json({

@@ -1,6 +1,6 @@
-import { tasks } from "@shared/api/mock-db";
-import { createMetadata } from "@shared/seo/metadata";
-import { CalendarPlanner } from "@features/calendar/calendar-planner";
+import { tasks } from "@share/api/mock-db";
+import { createMetadata } from "@share/seo/metadata";
+import { CalendarPlanner } from "@feature/calendar/calendar-planner";
 
 type CalendarPageProps = {
   params: Promise<{ locale: string }>;

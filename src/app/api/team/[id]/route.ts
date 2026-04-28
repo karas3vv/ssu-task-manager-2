@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { UpdateTeamMemberPayload, UserProfile } from "@entities/user/model";
-import { users } from "@shared/api/mock-db";
-import { ApiResponse } from "@shared/types/api";
+import { UpdateTeamMemberPayload, UserProfile } from "@share/model/user";
+import { users } from "@share/api/mock-db";
+import { ApiResponse } from "@share/types/api";
 
 type RouteContext = {
   params: Promise<{ id: string }>;

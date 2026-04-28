@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AuthResult, RegisterPayload } from "@entities/user/model";
-import { ApiResponse } from "@shared/types/api";
+import { AuthResult, RegisterPayload } from "@share/model/user";
+import { ApiResponse } from "@share/types/api";
 
 export async function POST(request: NextRequest): Promise<NextResponse<ApiResponse<AuthResult>>> {
   const payload = (await request.json()) as RegisterPayload;

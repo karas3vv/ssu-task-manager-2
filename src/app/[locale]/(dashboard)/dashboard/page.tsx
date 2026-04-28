@@ -1,6 +1,6 @@
-import { createMetadata } from "@shared/seo/metadata";
-import { demoUser, projects, tasks } from "@shared/api/mock-db";
-import { ProfileEditor } from "@features/profile/profile-editor";
+import { createMetadata } from "@share/seo/metadata";
+import { demoUser, projects, tasks } from "@share/api/mock-db";
+import { ProfileEditor } from "@feature/profile/profile-editor";
 
 type DashboardPageProps = {
   params: Promise<{ locale: string }>;

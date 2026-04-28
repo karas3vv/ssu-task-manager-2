@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { CreateTeamMemberPayload, UserProfile } from "@entities/user/model";
-import { createId, demoUser, users } from "@shared/api/mock-db";
-import { ApiResponse } from "@shared/types/api";
+import { CreateTeamMemberPayload, UserProfile } from "@share/model/user";
+import { createId, demoUser, users } from "@share/api/mock-db";
+import { ApiResponse } from "@share/types/api";
 
 export async function GET(): Promise<NextResponse<ApiResponse<UserProfile[]>>> {
   return NextResponse.json({

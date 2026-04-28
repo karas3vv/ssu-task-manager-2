@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { tasks, projects, users } from "@shared/api/mock-db";
-import { DashboardStats } from "@shared/api/task-manager-api";
-import { ApiResponse } from "@shared/types/api";
+import { tasks, projects, users } from "@share/api/mock-db";
+import { DashboardStats } from "@share/api/task-manager-api";
+import { ApiResponse } from "@share/types/api";
 
 export async function GET(): Promise<NextResponse<ApiResponse<DashboardStats>>> {
   const data: DashboardStats = {
