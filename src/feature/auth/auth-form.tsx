@@ -8,6 +8,7 @@ import { observer } from "mobx-react-lite";
 import { Locale } from "@share/config/i18n";
 import { useRootStore } from "@share/providers/store-provider";
 import { messages } from "@share/i18n/messages";
+import { LanguageSwitcher } from "@share/ui/language-switcher";
 
 type AuthFormMode = "login" | "register";
 
@@ -44,9 +45,12 @@ export const AuthForm = observer(function AuthForm({ locale, mode }: AuthFormPro
   return (
     <main className="auth-screen">
       <form className="panel form" onSubmit={handleSubmit}>
-        <Link className="brand" href={`/${locale}`}>
-          {t.common.appName}
-        </Link>
+        <div className="topbar" style={{ minHeight: "auto" }}>
+          <Link className="brand" href={`/${locale}`}>
+            {t.common.appName}
+          </Link>
+          <LanguageSwitcher locale={locale} />
+        </div>
         <h1>{isRegister ? t.auth.registerTitle : t.auth.loginTitle}</h1>
         {isRegister ? (
           <label className="field">

@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { Locale } from "@share/config/i18n";
 import { useRootStore } from "@share/providers/store-provider";
 import { messages } from "@share/i18n/messages";
+import { LanguageSwitcher } from "@share/ui/language-switcher";
 
 type DashboardShellProps = {
   children: ReactNode;
@@ -46,6 +47,7 @@ export function DashboardShell({ children, locale }: DashboardShellProps): JSX.E
           ))}
         </nav>
         <div className="toolbar" style={{ marginTop: 24 }}>
+          <LanguageSwitcher locale={locale} />
           <button
             className="button"
             type="button"

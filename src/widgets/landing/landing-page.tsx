@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Locale } from "@share/config/i18n";
 import { messages } from "@share/i18n/messages";
+import { LanguageSwitcher } from "@share/ui/language-switcher";
 
 type LandingPageProps = {
   locale: Locale;
@@ -12,6 +13,12 @@ export function LandingPage({ locale }: LandingPageProps): JSX.Element {
   return (
     <main className="hero">
       <div className="container">
+        <div className="topbar">
+          <Link className="brand" href={`/${locale}`}>
+            {t.common.appName}
+          </Link>
+          <LanguageSwitcher locale={locale} />
+        </div>
         <section className="hero-grid">
           <div>
             <h1>{t.landing.title}</h1>
