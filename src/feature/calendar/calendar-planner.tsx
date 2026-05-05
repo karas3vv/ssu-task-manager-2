@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Task } from "@share/model/task";
 import { Locale } from "@share/config/i18n";
@@ -20,10 +20,17 @@ type CalendarDay = {
   tasks: Task[];
 };
 
-const baseDate = new Date("2026-04-21T00:00:00");
+function getToday(): Date {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today;
+}
 
 function toIsoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 function addDays(date: Date, days: number): Date {
@@ -59,11 +66,22 @@ export const CalendarPlanner = observer(function CalendarPlanner({ initialTasks,
   const t = messages[locale];
   const taskPriorityLabels = getTaskPriorityLabels(locale);
   const visibleTasks = taskStore.tasks.length > 0 ? taskStore.tasks : initialTasks;
+  const [baseDate, setBaseDate] = useState<Date>(() => getToday());
 
   useEffect(() => {
     taskStore.hydrate(initialTasks);
     void taskStore.loadTasks();
   }, [initialTasks, taskStore]);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      const currentDate = getToday();
+
+      setBaseDate((previousDate) => (toIsoDate(previousDate) === toIsoDate(currentDate) ? previousDate : currentDate));
+    }, 60_000);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   const calendarDays: CalendarDay[] = Array.from({ length: 14 }, (_item, index) => {
     const date = addDays(baseDate, index);
