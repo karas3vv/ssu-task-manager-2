@@ -79,7 +79,7 @@ function createInitialDatabase(): MockDatabase {
       },
       {
         id: "project-3",
-        name: "Аналитика команды",
+        name: "Командный отчет",
         description: "Вывести метрики завершения задач и загрузки участников.",
         status: "paused",
         dueDate: "2026-06-10"

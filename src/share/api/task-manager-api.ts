@@ -4,13 +4,6 @@ import { AuthResult, CreateTeamMemberPayload, LoginPayload, RegisterPayload, Upd
 import { ApiResponse } from "@share/types/api";
 import { httpClient } from "./http";
 
-export type DashboardStats = {
-  activeTasks: number;
-  completedTasks: number;
-  activeProjects: number;
-  teamMembers: number;
-};
-
 export const taskManagerApi = {
   async login(payload: LoginPayload): Promise<AuthResult> {
     const response = await httpClient.post<ApiResponse<AuthResult>>("/api/auth/login", payload);
@@ -54,11 +47,6 @@ export const taskManagerApi = {
 
   async deleteTeamMember(memberId: string): Promise<string> {
     const response = await httpClient.delete<ApiResponse<string>>(`/api/team/${memberId}`);
-    return response.data.data;
-  },
-
-  async getStats(): Promise<DashboardStats> {
-    const response = await httpClient.get<ApiResponse<DashboardStats>>("/api/stats");
     return response.data.data;
   },
 

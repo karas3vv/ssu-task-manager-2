@@ -16,8 +16,6 @@ const ru = {
     projectsDescription: "Список проектов task-manager.",
     calendarTitle: "Календарь",
     calendarDescription: "Календарь дедлайнов задач.",
-    analyticsTitle: "Аналитика",
-    analyticsDescription: "Метрики задач и проектов.",
     teamTitle: "Команда",
     teamDescription: "Участники команды TaskFlow.",
     settingsTitle: "Настройки",
@@ -32,7 +30,6 @@ const ru = {
     tasks: "Задачи",
     projects: "Проекты",
     calendar: "Календарь",
-    analytics: "Аналитика",
     team: "Команда",
     settings: "Настройки",
     profile: "Профиль",
@@ -187,15 +184,6 @@ const ru = {
     error: "Ошибка календаря",
     notFound: "Календарь не найден"
   },
-  analyticsBoard: {
-    taskCompletion: "Выполнение задач",
-    highPriority: "Высокий приоритет",
-    activeProjects: "Активных проектов",
-    inReview: "На ревью",
-    loading: "Загрузка аналитики...",
-    error: "Ошибка аналитики",
-    notFound: "Аналитика не найдена"
-  },
   settingsBoard: {
     themeTitle: "Тема интерфейса",
     themeText: "Тема по умолчанию определяется настройкой браузера, затем ее можно переключить вручную.",
@@ -243,8 +231,6 @@ const en: Messages = {
     projectsDescription: "Task manager project list.",
     calendarTitle: "Calendar",
     calendarDescription: "Task deadline calendar.",
-    analyticsTitle: "Analytics",
-    analyticsDescription: "Task and project metrics.",
     teamTitle: "Team",
     teamDescription: "TaskFlow team members.",
     settingsTitle: "Settings",
@@ -259,7 +245,6 @@ const en: Messages = {
     tasks: "Tasks",
     projects: "Projects",
     calendar: "Calendar",
-    analytics: "Analytics",
     team: "Team",
     settings: "Settings",
     profile: "Profile",
@@ -413,15 +398,6 @@ const en: Messages = {
     loading: "Loading calendar...",
     error: "Calendar error",
     notFound: "Calendar not found"
-  },
-  analyticsBoard: {
-    taskCompletion: "Task completion",
-    highPriority: "High priority",
-    activeProjects: "Active projects",
-    inReview: "In review",
-    loading: "Loading analytics...",
-    error: "Analytics error",
-    notFound: "Analytics not found"
   },
   settingsBoard: {
     themeTitle: "Interface theme",

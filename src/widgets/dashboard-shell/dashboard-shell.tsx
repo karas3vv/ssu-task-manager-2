@@ -22,7 +22,6 @@ export function DashboardShell({ children, locale }: DashboardShellProps): JSX.E
     { href: `/${locale}/dashboard/tasks`, label: t.common.tasks },
     { href: `/${locale}/dashboard/projects`, label: t.common.projects },
     { href: `/${locale}/dashboard/calendar`, label: t.common.calendar },
-    { href: `/${locale}/dashboard/analytics`, label: t.common.analytics },
     { href: `/${locale}/dashboard/team`, label: t.common.team },
     { href: `/${locale}/dashboard/settings`, label: t.common.settings }
   ];

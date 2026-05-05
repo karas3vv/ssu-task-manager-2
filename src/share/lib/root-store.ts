@@ -4,7 +4,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { CreateProjectPayload, Project, UpdateProjectPayload } from "@share/model/project";
 import { CreateTaskPayload, Task, UpdateTaskPayload } from "@share/model/task";
 import { AuthResult, CreateTeamMemberPayload, LoginPayload, RegisterPayload, UpdateProfilePayload, UpdateTeamMemberPayload, UserProfile } from "@share/model/user";
-import { DashboardStats, taskManagerApi } from "@share/api/task-manager-api";
+import { taskManagerApi } from "@share/api/task-manager-api";
 import { RequestStatus } from "@share/types/api";
 
 export class AuthStore {
@@ -259,36 +259,6 @@ export class ProjectStore {
   }
 }
 
-export class DashboardStore {
-  stats: DashboardStats | null = null;
-  status: RequestStatus = "idle";
-  error: string | null = null;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  async loadStats(): Promise<void> {
-    if (this.status === "loading" || this.stats !== null) {
-      return;
-    }
-
-    this.status = "loading";
-    try {
-      const stats = await taskManagerApi.getStats();
-      runInAction(() => {
-        this.stats = stats;
-        this.status = "success";
-      });
-    } catch (error) {
-      runInAction(() => {
-        this.error = error instanceof Error ? error.message : "Не удалось загрузить статистику";
-        this.status = "error";
-      });
-    }
-  }
-}
-
 export class TeamStore {
   members: UserProfile[] = [];
   status: RequestStatus = "idle";
@@ -416,7 +386,6 @@ export class RootStore {
   authStore: AuthStore;
   taskStore: TaskStore;
   projectStore: ProjectStore;
-  dashboardStore: DashboardStore;
   teamStore: TeamStore;
   themeStore: ThemeStore;
 
@@ -424,7 +393,6 @@ export class RootStore {
     this.authStore = new AuthStore(this);
     this.taskStore = new TaskStore();
     this.projectStore = new ProjectStore();
-    this.dashboardStore = new DashboardStore();
     this.teamStore = new TeamStore();
     this.themeStore = new ThemeStore();
   }
