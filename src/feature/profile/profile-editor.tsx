@@ -4,7 +4,9 @@ import type * as React from "react";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { UpdateProfilePayload, UserProfile, UserRole } from "@share/model/user";
-import { getPositionLabel, userRoleLabels } from "@share/lib/display-labels";
+import { getPositionLabelByLocale, getUserRoleLabels } from "@share/lib/display-labels";
+import { Locale } from "@share/config/i18n";
+import { messages } from "@share/i18n/messages";
 import { useRootStore } from "@share/providers/store-provider";
 
 type ProfileEditorProps = {
@@ -12,23 +14,26 @@ type ProfileEditorProps = {
   tasksTotal: number;
   projectsTotal: number;
   completedTasks: number;
+  locale: Locale;
 };
 
 const avatarColors: string[] = ["#206a5d", "#b85c38", "#4d5f8f", "#7d4f8f", "#2f7d54"];
-
-const roles: Array<{ value: UserRole; label: string }> = [
-  { value: "owner", label: userRoleLabels.owner },
-  { value: "manager", label: userRoleLabels.manager },
-  { value: "member", label: userRoleLabels.member }
-];
 
 export const ProfileEditor = observer(function ProfileEditor({
   initialProfile,
   tasksTotal,
   projectsTotal,
-  completedTasks
+  completedTasks,
+  locale
 }: ProfileEditorProps): JSX.Element {
   const { authStore } = useRootStore();
+  const t = messages[locale];
+  const userRoleLabels = getUserRoleLabels(locale);
+  const roles: Array<{ value: UserRole; label: string }> = [
+    { value: "owner", label: userRoleLabels.owner },
+    { value: "manager", label: userRoleLabels.manager },
+    { value: "member", label: userRoleLabels.member }
+  ];
   const [form, setForm] = useState<UpdateProfilePayload>({
     name: initialProfile.name,
     email: initialProfile.email,
@@ -73,9 +78,9 @@ export const ProfileEditor = observer(function ProfileEditor({
   return (
     <div className="profile-grid">
       <form className="panel form profile-form" onSubmit={handleSubmit}>
-        <h2>Редактирование профиля</h2>
+        <h2>{t.profile.editTitle}</h2>
         <label className="field">
-          Имя
+          {t.common.name}
           <input className="input" value={form.name} onChange={handleInput("name")} required />
         </label>
         <label className="field">
@@ -83,15 +88,15 @@ export const ProfileEditor = observer(function ProfileEditor({
           <input className="input" type="email" value={form.email} onChange={handleInput("email")} required />
         </label>
         <label className="field">
-          Должность
+          {t.common.position}
           <input className="input" value={form.position} onChange={handleInput("position")} required />
         </label>
         <label className="field">
-          Рабочее пространство
+          {t.common.workspace}
           <input className="input" value={form.workspaceName} onChange={handleInput("workspaceName")} required />
         </label>
         <label className="field">
-          Роль
+          {t.common.role}
           <select className="input" value={form.role} onChange={handleInput("role")}>
             {roles.map((role) => (
               <option key={role.value} value={role.value}>
@@ -102,16 +107,16 @@ export const ProfileEditor = observer(function ProfileEditor({
         </label>
 
         <fieldset className="fieldset">
-          <legend>Цвет аватара</legend>
+          <legend>{t.profile.avatarColor}</legend>
           <div className="swatches">
             {avatarColors.map((color) => (
               <button
-                aria-label={`Выбрать цвет ${color}`}
+                aria-label={`${t.profile.chooseColor} ${color}`}
                 className={color === form.avatarColor ? "swatch active" : "swatch"}
                 key={color}
                 onClick={() => updateField("avatarColor", color)}
                 style={{ background: color }}
-                title={`Цвет ${color}`}
+                title={`${t.profile.color} ${color}`}
                 type="button"
               />
             ))}
@@ -119,29 +124,29 @@ export const ProfileEditor = observer(function ProfileEditor({
         </fieldset>
 
         <fieldset className="fieldset">
-          <legend>Уведомления</legend>
+          <legend>{t.profile.notifications}</legend>
           <label className="check">
             <input
               checked={form.notifications.deadlineReminders}
               onChange={() => updateNotification("deadlineReminders")}
               type="checkbox"
             />
-            Напоминать о дедлайнах
+            {t.profile.deadlineReminders}
           </label>
           <label className="check">
             <input checked={form.notifications.reviewUpdates} onChange={() => updateNotification("reviewUpdates")} type="checkbox" />
-            Сообщать о задачах на ревью
+            {t.profile.reviewUpdates}
           </label>
           <label className="check">
             <input checked={form.notifications.dailyDigest} onChange={() => updateNotification("dailyDigest")} type="checkbox" />
-            Присылать ежедневную сводку
+            {t.profile.dailyDigest}
           </label>
         </fieldset>
 
         {authStore.error ? <p className="muted">{authStore.error}</p> : null}
         {authStore.saveMessage ? <p className="success-text">{authStore.saveMessage}</p> : null}
         <button className="button primary" disabled={authStore.saveStatus === "loading"} type="submit">
-          {authStore.saveStatus === "loading" ? "Сохранение..." : "Сохранить профиль"}
+          {authStore.saveStatus === "loading" ? t.common.saving : t.profile.saveProfile}
         </button>
       </form>
 
@@ -152,24 +157,24 @@ export const ProfileEditor = observer(function ProfileEditor({
         <h2>{profile.name}</h2>
         <p className="muted">{profile.email}</p>
         <span className="badge">{userRoleLabels[profile.role]}</span>
-        <p>{getPositionLabel(profile.position)}</p>
+        <p>{getPositionLabelByLocale(profile.position, locale)}</p>
         <p className="muted">{profile.workspaceName}</p>
         <div className="stats profile-stats">
           <div className="stat">
             <strong>{tasksTotal}</strong>
-            <span className="muted">Задач</span>
+            <span className="muted">{t.profile.statsTasks}</span>
           </div>
           <div className="stat">
             <strong>{projectsTotal}</strong>
-            <span className="muted">Проектов</span>
+            <span className="muted">{t.profile.statsProjects}</span>
           </div>
           <div className="stat">
             <strong>{completedTasks}</strong>
-            <span className="muted">Готово</span>
+            <span className="muted">{t.profile.statsDone}</span>
           </div>
           <div className="stat">
             <strong>{profile.notifications.dailyDigest ? "On" : "Off"}</strong>
-            <span className="muted">Сводка</span>
+            <span className="muted">{t.profile.statsDigest}</span>
           </div>
         </div>
       </aside>

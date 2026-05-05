@@ -1,6 +1,7 @@
 import { resolveLocale } from "@share/config/i18n";
 import { AuthForm } from "@feature/auth/auth-form";
 import { createMetadata } from "@share/seo/metadata";
+import { messages } from "@share/i18n/messages";
 
 type RegisterPageProps = {
   params: Promise<{ locale: string }>;
@@ -8,7 +9,8 @@ type RegisterPageProps = {
 
 export async function generateMetadata({ params }: RegisterPageProps) {
   const { locale } = await params;
-  return createMetadata(locale, "Регистрация", "Создание аккаунта TaskFlow.");
+  const t = messages[resolveLocale(locale)].metadata;
+  return createMetadata(locale, t.registerTitle, t.registerDescription);
 }
 
 export default async function RegisterPage({ params }: RegisterPageProps): Promise<JSX.Element> {

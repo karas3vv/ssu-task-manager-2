@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { isLocale, Locale, localeLabels } from "@share/config/i18n";
+import { messages } from "@share/i18n/messages";
 
 type LanguageSwitcherProps = {
   locale: Locale;
@@ -23,7 +24,7 @@ export function LanguageSwitcher({ locale, className = "button" }: LanguageSwitc
   const href = segments.join("/") || `/${targetLocale}`;
 
   return (
-    <Link className={className} href={href} hrefLang={targetLocale} title="Сменить язык">
+    <Link className={className} href={href} hrefLang={targetLocale} title={messages[locale].language.switch}>
       {localeLabels[targetLocale]}
     </Link>
   );

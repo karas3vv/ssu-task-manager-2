@@ -3,10 +3,14 @@
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { Task } from "@share/model/task";
+import { Locale } from "@share/config/i18n";
+import { getTaskPriorityLabels } from "@share/lib/display-labels";
+import { messages } from "@share/i18n/messages";
 import { useRootStore } from "@share/providers/store-provider";
 
 type CalendarPlannerProps = {
   initialTasks: Task[];
+  locale: Locale;
 };
 
 type CalendarDay = {
@@ -28,8 +32,8 @@ function addDays(date: Date, days: number): Date {
   return nextDate;
 }
 
-function formatDay(date: Date): string {
-  return new Intl.DateTimeFormat("ru-RU", {
+function formatDay(date: Date, locale: Locale): string {
+  return new Intl.DateTimeFormat(locale === "ru" ? "ru-RU" : "en-US", {
     weekday: "short",
     day: "2-digit",
     month: "short"
@@ -50,18 +54,10 @@ function getTasksByDate(tasks: Task[], date: string): Task[] {
   return tasks.filter((task) => task.dueDate === date).sort((first, second) => getPriorityRank(first) - getPriorityRank(second));
 }
 
-function getPriorityLabel(task: Task): string {
-  const labels: Record<Task["priority"], string> = {
-    high: "Высокий",
-    medium: "Средний",
-    low: "Низкий"
-  };
-
-  return labels[task.priority];
-}
-
-export const CalendarPlanner = observer(function CalendarPlanner({ initialTasks }: CalendarPlannerProps): JSX.Element {
+export const CalendarPlanner = observer(function CalendarPlanner({ initialTasks, locale }: CalendarPlannerProps): JSX.Element {
   const { taskStore } = useRootStore();
+  const t = messages[locale];
+  const taskPriorityLabels = getTaskPriorityLabels(locale);
   const visibleTasks = taskStore.tasks.length > 0 ? taskStore.tasks : initialTasks;
 
   useEffect(() => {
@@ -76,7 +72,7 @@ export const CalendarPlanner = observer(function CalendarPlanner({ initialTasks 
     return {
       date,
       isoDate,
-      label: formatDay(date),
+      label: formatDay(date, locale),
       tasks: getTasksByDate(visibleTasks, isoDate)
     };
   });
@@ -89,7 +85,7 @@ export const CalendarPlanner = observer(function CalendarPlanner({ initialTasks 
 
   return (
     <div className="calendar-layout">
-      <section className="calendar-board" aria-label="Календарь задач">
+      <section className="calendar-board" aria-label={t.calendarBoard.boardLabel}>
         {calendarDays.map((day) => (
           <article className={day.isoDate === toIsoDate(baseDate) ? "calendar-day today" : "calendar-day"} key={day.isoDate}>
             <header>
@@ -101,34 +97,34 @@ export const CalendarPlanner = observer(function CalendarPlanner({ initialTasks 
                 {day.tasks.map((task) => (
                   <div className={`calendar-task priority-${task.priority}`} key={task.id}>
                     <span>{task.title}</span>
-                    <small>{getPriorityLabel(task)} приоритет</small>
+                    <small>{taskPriorityLabels[task.priority]} {t.calendarBoard.prioritySuffix}</small>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="muted empty-day">Нет дедлайнов</p>
+              <p className="muted empty-day">{t.calendarBoard.noDeadlines}</p>
             )}
           </article>
         ))}
       </section>
       <aside className="calendar-summary">
         <article className="card">
-          <h3>Сегодня</h3>
+          <h3>{t.calendarBoard.today}</h3>
           <strong>{todayTasks.length}</strong>
-          <p className="muted">задач с дедлайном на сегодня</p>
+          <p className="muted">{t.calendarBoard.todayText}</p>
         </article>
         <article className="card">
-          <h3>В плане</h3>
+          <h3>{t.calendarBoard.planned}</h3>
           <strong>{plannedTasks}</strong>
-          <p className="muted">дедлайнов в ближайшие 14 дней</p>
+          <p className="muted">{t.calendarBoard.plannedText}</p>
         </article>
         <article className="card">
-          <h3>Просрочено</h3>
+          <h3>{t.calendarBoard.overdue}</h3>
           <strong>{overdueTasks.length}</strong>
-          <p className="muted">незавершенных задач раньше сегодняшней даты</p>
+          <p className="muted">{t.calendarBoard.overdueText}</p>
         </article>
         <article className="card focus-card">
-          <h3>Следующий фокус</h3>
+          <h3>{t.calendarBoard.nextFocus}</h3>
           {nextTask ? (
             <>
               <span className="badge">{nextTask.dueDate}</span>
@@ -136,7 +132,7 @@ export const CalendarPlanner = observer(function CalendarPlanner({ initialTasks 
               <p className="muted">{nextTask.description}</p>
             </>
           ) : (
-            <p className="muted">Нет активных дедлайнов.</p>
+            <p className="muted">{t.calendarBoard.noActiveDeadlines}</p>
           )}
         </article>
       </aside>

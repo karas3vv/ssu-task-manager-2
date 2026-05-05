@@ -29,22 +29,14 @@ export function LandingPage({ locale }: LandingPageProps): JSX.Element {
               </Link>
             </div>
           </div>
-          <div className="panel hero-preview" aria-label="Превью рабочего процесса">
-            <article className="preview-column">
-              <span className="badge">План</span>
-              <h3>Соберите задачи</h3>
-              <p className="muted">Опишите работу, назначьте дедлайн и приоритет.</p>
-            </article>
-            <article className="preview-column">
-              <span className="badge">Фокус</span>
-              <h3>Видите неделю</h3>
-              <p className="muted">Календарь показывает, что важно сегодня и что приближается.</p>
-            </article>
-            <article className="preview-column">
-              <span className="badge">Команда</span>
-              <h3>Двигайтесь вместе</h3>
-              <p className="muted">Профили, проекты и задачи остаются в одном рабочем пространстве.</p>
-            </article>
+          <div className="panel hero-preview" aria-label={t.landing.previewLabel}>
+            {Object.values(t.landing.preview).map((item) => (
+              <article className="preview-column" key={item.title}>
+                <span className="badge">{item.badge}</span>
+                <h3>{item.title}</h3>
+                <p className="muted">{item.text}</p>
+              </article>
+            ))}
           </div>
         </section>
       </div>

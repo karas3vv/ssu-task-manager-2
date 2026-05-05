@@ -4,19 +4,17 @@ import type * as React from "react";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { CreateTeamMemberPayload, UserProfile, UserRole } from "@share/model/user";
-import { getPositionLabel, userRoleLabels } from "@share/lib/display-labels";
+import { getPositionLabelByLocale, getUserRoleLabels } from "@share/lib/display-labels";
+import { Locale } from "@share/config/i18n";
+import { messages } from "@share/i18n/messages";
 import { useRootStore } from "@share/providers/store-provider";
 
 type TeamListProps = {
   initialMembers: UserProfile[];
+  locale: Locale;
 };
 
 const avatarColors: string[] = ["#206a5d", "#b85c38", "#4d5f8f", "#7d4f8f", "#2f7d54"];
-
-const memberRoles: Array<{ value: Exclude<UserRole, "owner">; label: string }> = [
-  { value: "manager", label: userRoleLabels.manager },
-  { value: "member", label: userRoleLabels.member }
-];
 
 const emptyMemberForm: CreateTeamMemberPayload = {
   name: "",
@@ -26,8 +24,14 @@ const emptyMemberForm: CreateTeamMemberPayload = {
   position: ""
 };
 
-export const TeamList = observer(function TeamList({ initialMembers }: TeamListProps): JSX.Element {
+export const TeamList = observer(function TeamList({ initialMembers, locale }: TeamListProps): JSX.Element {
   const { authStore, teamStore } = useRootStore();
+  const t = messages[locale];
+  const userRoleLabels = getUserRoleLabels(locale);
+  const memberRoles: Array<{ value: Exclude<UserRole, "owner">; label: string }> = [
+    { value: "manager", label: userRoleLabels.manager },
+    { value: "member", label: userRoleLabels.member }
+  ];
   const visibleMembers = teamStore.members.length > 0 ? teamStore.members : initialMembers;
   const currentUser = authStore.user ?? visibleMembers.find((member) => member.role === "owner") ?? null;
   const canManageTeam = currentUser?.role === "owner";
@@ -47,7 +51,7 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
   }, [authStore, initialMembers, teamStore]);
 
   if (teamStore.status === "loading" && visibleMembers.length === 0) {
-    return <p className="muted">Команда загружается...</p>;
+    return <p className="muted">{t.teamBoard.loading}</p>;
   }
 
   async function handleCreateMember(event: React.FormEvent<HTMLFormElement>): Promise<void> {
@@ -94,10 +98,10 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
     <div className="team-workspace">
       {canManageTeam ? (
         <form className="panel form team-form" onSubmit={handleCreateMember}>
-          <h2>Добавить участника</h2>
+          <h2>{t.teamBoard.addMember}</h2>
           <div className="form-row">
             <label className="field">
-              Имя
+              {t.common.name}
               <input className="input" value={newMember.name} onChange={(event) => setNewMember((form) => ({ ...form, name: event.target.value }))} required />
             </label>
             <label className="field">
@@ -107,11 +111,11 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
           </div>
           <div className="form-row">
             <label className="field">
-              Должность
+              {t.common.position}
               <input className="input" value={newMember.position} onChange={(event) => setNewMember((form) => ({ ...form, position: event.target.value }))} required />
             </label>
             <label className="field">
-              Роль
+              {t.common.role}
               <select
                 className="input"
                 value={newMember.role}
@@ -126,16 +130,16 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
             </label>
           </div>
           <fieldset className="fieldset">
-            <legend>Цвет аватара</legend>
+            <legend>{t.profile.avatarColor}</legend>
             <div className="swatches">
               {avatarColors.map((color) => (
                 <button
-                  aria-label={`Выбрать цвет ${color}`}
+                  aria-label={`${t.profile.chooseColor} ${color}`}
                   className={color === newMember.avatarColor ? "swatch active" : "swatch"}
                   key={color}
                   onClick={() => setNewMember((form) => ({ ...form, avatarColor: color }))}
                   style={{ background: color }}
-                  title={`Цвет ${color}`}
+                  title={`${t.profile.color} ${color}`}
                   type="button"
                 />
               ))}
@@ -144,7 +148,7 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
           {teamStore.error ? <p className="muted">{teamStore.error}</p> : null}
           {teamStore.saveMessage ? <p className="success-text">{teamStore.saveMessage}</p> : null}
           <button className="button primary" disabled={teamStore.saveStatus === "loading"} type="submit">
-            {teamStore.saveStatus === "loading" ? "Сохранение..." : "Добавить в команду"}
+            {teamStore.saveStatus === "loading" ? t.common.saving : t.teamBoard.addToTeam}
           </button>
         </form>
       ) : null}
@@ -155,7 +159,7 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
             {editingMemberId === user.id && editMember !== null ? (
               <form className="edit-task-form" onSubmit={(event) => void handleUpdateMember(event, user.id)}>
                 <label className="field">
-                  Имя
+                  {t.common.name}
                   <input className="input" value={editMember.name} onChange={(event) => setEditMember((form) => (form === null ? form : { ...form, name: event.target.value }))} required />
                 </label>
                 <label className="field">
@@ -169,7 +173,7 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
                   />
                 </label>
                 <label className="field">
-                  Должность
+                  {t.common.position}
                   <input
                     className="input"
                     value={editMember.position}
@@ -178,7 +182,7 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
                   />
                 </label>
                 <label className="field">
-                  Роль
+                  {t.common.role}
                   <select
                     className="input"
                     value={editMember.role}
@@ -193,10 +197,10 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
                 </label>
                 <div className="card-actions">
                   <button className="button primary" type="submit">
-                    Сохранить
+                    {t.common.save}
                   </button>
                   <button className="button" type="button" onClick={cancelEdit}>
-                    Отмена
+                    {t.common.cancel}
                   </button>
                 </div>
               </form>
@@ -207,15 +211,15 @@ export const TeamList = observer(function TeamList({ initialMembers }: TeamListP
                 </div>
                 <h3>{user.name}</h3>
                 <p className="muted">{user.email}</p>
-                <p>{getPositionLabel(user.position)}</p>
+                <p>{getPositionLabelByLocale(user.position, locale)}</p>
                 <span className="badge">{userRoleLabels[user.role]}</span>
                 {canManageTeam && user.role !== "owner" ? (
                   <div className="card-actions">
                     <button className="button" type="button" onClick={() => startEdit(user)}>
-                      Изменить
+                      {t.common.edit}
                     </button>
                     <button className="button danger" type="button" onClick={() => void teamStore.deleteMember(user.id)}>
-                      Удалить
+                      {t.common.delete}
                     </button>
                   </div>
                 ) : null}

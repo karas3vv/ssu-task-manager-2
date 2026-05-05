@@ -5,15 +5,21 @@ import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { CreateTaskPayload, Task, TaskPriority, TaskStatus } from "@share/model/task";
 import { projects, users } from "@share/api/mock-db";
-import { taskPriorityLabels, taskStatusLabels } from "@share/lib/display-labels";
+import { getTaskPriorityLabels, getTaskStatusLabels } from "@share/lib/display-labels";
+import { Locale } from "@share/config/i18n";
+import { messages } from "@share/i18n/messages";
 import { useRootStore } from "@share/providers/store-provider";
 
 type TaskBoardProps = {
   initialTasks: Task[];
+  locale: Locale;
 };
 
-export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoardProps): JSX.Element {
+export const TaskBoard = observer(function TaskBoard({ initialTasks, locale }: TaskBoardProps): JSX.Element {
   const { taskStore } = useRootStore();
+  const t = messages[locale];
+  const taskPriorityLabels = getTaskPriorityLabels(locale);
+  const taskStatusLabels = getTaskStatusLabels(locale);
   const visibleTasks = taskStore.tasks.length > 0 ? taskStore.tasks : initialTasks;
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<CreateTaskPayload | null>(null);
@@ -33,7 +39,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
   }, [initialTasks, taskStore]);
 
   if (taskStore.status === "loading" && visibleTasks.length === 0) {
-    return <p className="muted">Задачи загружаются...</p>;
+    return <p className="muted">{t.tasksBoard.loading}</p>;
   }
 
   async function handleCreateTask(event: React.FormEvent<HTMLFormElement>): Promise<void> {
@@ -81,30 +87,30 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
   return (
     <div className="task-workspace">
       <form className="panel form task-form" onSubmit={handleCreateTask}>
-        <h2>Новая задача</h2>
+        <h2>{t.tasksBoard.newTask}</h2>
         <label className="field">
-          Название
+          {t.common.title}
           <input
             className="input"
             value={form.title}
             onChange={(event) => setForm((currentForm) => ({ ...currentForm, title: event.target.value }))}
-            placeholder="Например, подготовить отчет"
+            placeholder={t.tasksBoard.titlePlaceholder}
             required
           />
         </label>
         <label className="field">
-          Описание
+          {t.common.description}
           <textarea
             className="input textarea"
             value={form.description}
             onChange={(event) => setForm((currentForm) => ({ ...currentForm, description: event.target.value }))}
-            placeholder="Что нужно сделать"
+            placeholder={t.tasksBoard.descriptionPlaceholder}
             required
           />
         </label>
         <div className="form-row">
           <label className="field">
-            Дедлайн
+            {t.common.deadline}
             <input
               className="input"
               type="date"
@@ -114,7 +120,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
             />
           </label>
           <label className="field">
-            Приоритет
+            {t.common.priority}
             <select
               className="input"
               value={form.priority}
@@ -128,7 +134,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
         </div>
         <div className="form-row">
           <label className="field">
-            Проект
+            {t.common.project}
             <select
               className="input"
               value={form.projectId}
@@ -142,7 +148,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
             </select>
           </label>
           <label className="field">
-            Исполнитель
+            {t.common.assignee}
             <select
               className="input"
               value={form.assigneeId}
@@ -159,7 +165,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
         {taskStore.error ? <p className="muted">{taskStore.error}</p> : null}
         {taskStore.createMessage ? <p className="success-text">{taskStore.createMessage}</p> : null}
         <button className="button primary" disabled={taskStore.createStatus === "loading"} type="submit">
-          {taskStore.createStatus === "loading" ? "Добавление..." : "Добавить задачу"}
+          {taskStore.createStatus === "loading" ? t.common.adding : t.tasksBoard.addTask}
         </button>
       </form>
 
@@ -169,7 +175,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
             {editingTaskId === task.id && editForm !== null ? (
               <form className="edit-task-form" onSubmit={(event) => void handleUpdateTask(event, task.id)}>
                 <label className="field">
-                  Название
+                  {t.common.title}
                   <input
                     className="input"
                     value={editForm.title}
@@ -178,7 +184,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
                   />
                 </label>
                 <label className="field">
-                  Описание
+                  {t.common.description}
                   <textarea
                     className="input textarea"
                     value={editForm.description}
@@ -188,7 +194,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
                 </label>
                 <div className="form-row">
                   <label className="field">
-                    Дедлайн
+                    {t.common.deadline}
                     <input
                       className="input"
                       type="date"
@@ -198,7 +204,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
                     />
                   </label>
                   <label className="field">
-                    Приоритет
+                    {t.common.priority}
                     <select
                       className="input"
                       value={editForm.priority}
@@ -213,7 +219,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
                   </label>
                 </div>
                 <label className="field">
-                  Статус
+                  {t.common.status}
                   <select
                     className="input"
                     value={editForm.status}
@@ -227,10 +233,10 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
                 </label>
                 <div className="card-actions">
                   <button className="button primary" type="submit">
-                    Сохранить
+                    {t.common.save}
                   </button>
                   <button className="button" type="button" onClick={cancelEdit}>
-                    Отмена
+                    {t.common.cancel}
                   </button>
                 </div>
               </form>
@@ -239,13 +245,13 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks }: TaskBoard
                 <span className="badge">{taskStatusLabels[task.status]}</span>
                 <h3>{task.title}</h3>
                 <p className="muted">{task.description}</p>
-                <p>Дедлайн: {task.dueDate}</p>
+                <p>{t.tasksBoard.deadlinePrefix}: {task.dueDate}</p>
                 <div className="card-actions">
                   <button className="button" type="button" onClick={() => void taskStore.toggleTask(task)}>
-                    {task.status === "done" ? "Вернуть в работу" : "Готово"}
+                    {task.status === "done" ? t.tasksBoard.returnToWork : t.common.done}
                   </button>
                   <button className="button" type="button" onClick={() => startEdit(task)}>
-                    Изменить
+                    {t.common.edit}
                   </button>
                 </div>
               </>

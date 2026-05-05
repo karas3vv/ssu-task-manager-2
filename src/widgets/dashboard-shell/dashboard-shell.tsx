@@ -39,7 +39,7 @@ export function DashboardShell({ children, locale }: DashboardShellProps): JSX.E
         <Link className="brand" href={`/${locale}/dashboard`}>
           {t.common.appName}
         </Link>
-        <nav aria-label="Навигация кабинета">
+        <nav aria-label={t.common.dashboard}>
           {items.map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}
@@ -51,7 +51,7 @@ export function DashboardShell({ children, locale }: DashboardShellProps): JSX.E
           <button
             className="button"
             type="button"
-            title="Сменить тему"
+            title={t.settingsBoard.themeTitle}
             onClick={() => themeStore.setTheme(themeStore.theme === "dark" ? "light" : "dark")}
           >
             ◐

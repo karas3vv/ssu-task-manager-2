@@ -4,15 +4,20 @@ import type * as React from "react";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { CreateProjectPayload, Project, ProjectStatus } from "@share/model/project";
-import { projectStatusLabels } from "@share/lib/display-labels";
+import { getProjectStatusLabels } from "@share/lib/display-labels";
+import { Locale } from "@share/config/i18n";
+import { messages } from "@share/i18n/messages";
 import { useRootStore } from "@share/providers/store-provider";
 
 type ProjectListProps = {
   initialProjects: Project[];
+  locale: Locale;
 };
 
-export const ProjectList = observer(function ProjectList({ initialProjects }: ProjectListProps): JSX.Element {
+export const ProjectList = observer(function ProjectList({ initialProjects, locale }: ProjectListProps): JSX.Element {
   const { projectStore } = useRootStore();
+  const t = messages[locale];
+  const projectStatusLabels = getProjectStatusLabels(locale);
   const visibleProjects = projectStore.projects.length > 0 ? projectStore.projects : initialProjects;
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<CreateProjectPayload | null>(null);
@@ -29,7 +34,7 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
   }, [initialProjects, projectStore]);
 
   if (projectStore.status === "loading" && visibleProjects.length === 0) {
-    return <p className="muted">Проекты загружаются...</p>;
+    return <p className="muted">{t.projectsBoard.loading}</p>;
   }
 
   async function handleCreateProject(event: React.FormEvent<HTMLFormElement>): Promise<void> {
@@ -74,30 +79,30 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
   return (
     <div className="task-workspace">
       <form className="panel form task-form" onSubmit={handleCreateProject}>
-        <h2>Новый проект</h2>
+        <h2>{t.projectsBoard.newProject}</h2>
         <label className="field">
-          Название
+          {t.common.title}
           <input
             className="input"
             value={form.name}
             onChange={(event) => setForm((currentForm) => ({ ...currentForm, name: event.target.value }))}
-            placeholder="Например, запуск продукта"
+            placeholder={t.projectsBoard.titlePlaceholder}
             required
           />
         </label>
         <label className="field">
-          Описание
+          {t.common.description}
           <textarea
             className="input textarea"
             value={form.description}
             onChange={(event) => setForm((currentForm) => ({ ...currentForm, description: event.target.value }))}
-            placeholder="Что входит в проект"
+            placeholder={t.projectsBoard.descriptionPlaceholder}
             required
           />
         </label>
         <div className="form-row">
           <label className="field">
-            Дедлайн
+            {t.common.deadline}
             <input
               className="input"
               type="date"
@@ -107,7 +112,7 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
             />
           </label>
           <label className="field">
-            Статус
+            {t.common.status}
             <select
               className="input"
               value={form.status}
@@ -122,7 +127,7 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
         {projectStore.error ? <p className="muted">{projectStore.error}</p> : null}
         {projectStore.createMessage ? <p className="success-text">{projectStore.createMessage}</p> : null}
         <button className="button primary" disabled={projectStore.createStatus === "loading"} type="submit">
-          {projectStore.createStatus === "loading" ? "Добавление..." : "Добавить проект"}
+          {projectStore.createStatus === "loading" ? t.common.adding : t.projectsBoard.addProject}
         </button>
       </form>
 
@@ -132,7 +137,7 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
             {editingProjectId === project.id && editForm !== null ? (
               <form className="edit-task-form" onSubmit={(event) => void handleUpdateProject(event, project.id)}>
                 <label className="field">
-                  Название
+                  {t.common.title}
                   <input
                     className="input"
                     value={editForm.name}
@@ -141,7 +146,7 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
                   />
                 </label>
                 <label className="field">
-                  Описание
+                  {t.common.description}
                   <textarea
                     className="input textarea"
                     value={editForm.description}
@@ -151,7 +156,7 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
                 </label>
                 <div className="form-row">
                   <label className="field">
-                    Дедлайн
+                    {t.common.deadline}
                     <input
                       className="input"
                       type="date"
@@ -161,7 +166,7 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
                     />
                   </label>
                   <label className="field">
-                    Статус
+                    {t.common.status}
                     <select
                       className="input"
                       value={editForm.status}
@@ -177,10 +182,10 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
                 </div>
                 <div className="card-actions">
                   <button className="button primary" type="submit">
-                    Сохранить
+                    {t.common.save}
                   </button>
                   <button className="button" type="button" onClick={cancelEdit}>
-                    Отмена
+                    {t.common.cancel}
                   </button>
                 </div>
               </form>
@@ -189,10 +194,10 @@ export const ProjectList = observer(function ProjectList({ initialProjects }: Pr
                 <span className="badge">{projectStatusLabels[project.status]}</span>
                 <h3>{project.name}</h3>
                 <p className="muted">{project.description}</p>
-                <p>Дедлайн: {project.dueDate}</p>
+                <p>{t.projectsBoard.deadlinePrefix}: {project.dueDate}</p>
                 <div className="card-actions">
                   <button className="button" type="button" onClick={() => startEdit(project)}>
-                    Изменить
+                    {t.common.edit}
                   </button>
                 </div>
               </>
