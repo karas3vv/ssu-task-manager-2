@@ -17,9 +17,7 @@ const ru = {
     calendarTitle: "Календарь",
     calendarDescription: "Календарь дедлайнов задач.",
     teamTitle: "Команда",
-    teamDescription: "Участники команды TaskFlow.",
-    settingsTitle: "Настройки",
-    settingsDescription: "Настройки темы и рабочего пространства."
+    teamDescription: "Участники команды TaskFlow."
   },
   common: {
     appName: "TaskFlow",
@@ -31,7 +29,6 @@ const ru = {
     projects: "Проекты",
     calendar: "Календарь",
     team: "Команда",
-    settings: "Настройки",
     profile: "Профиль",
     home: "Главная",
     save: "Сохранить",
@@ -184,14 +181,8 @@ const ru = {
     error: "Ошибка календаря",
     notFound: "Календарь не найден"
   },
-  settingsBoard: {
-    themeTitle: "Тема интерфейса",
-    themeText: "Тема по умолчанию определяется настройкой браузера, затем ее можно переключить вручную.",
-    light: "Светлая",
-    dark: "Темная",
-    loading: "Загрузка настроек...",
-    error: "Ошибка настроек",
-    notFound: "Настройки не найдены"
+  theme: {
+    title: "Сменить тему"
   },
   pages: {
     publicErrorTitle: "Ошибка",
@@ -232,9 +223,7 @@ const en: Messages = {
     calendarTitle: "Calendar",
     calendarDescription: "Task deadline calendar.",
     teamTitle: "Team",
-    teamDescription: "TaskFlow team members.",
-    settingsTitle: "Settings",
-    settingsDescription: "Theme and workspace settings."
+    teamDescription: "TaskFlow team members."
   },
   common: {
     appName: "TaskFlow",
@@ -246,7 +235,6 @@ const en: Messages = {
     projects: "Projects",
     calendar: "Calendar",
     team: "Team",
-    settings: "Settings",
     profile: "Profile",
     home: "Home",
     save: "Save",
@@ -399,14 +387,8 @@ const en: Messages = {
     error: "Calendar error",
     notFound: "Calendar not found"
   },
-  settingsBoard: {
-    themeTitle: "Interface theme",
-    themeText: "The default theme follows the browser setting, then it can be changed manually.",
-    light: "Light",
-    dark: "Dark",
-    loading: "Loading settings...",
-    error: "Settings error",
-    notFound: "Settings not found"
+  theme: {
+    title: "Switch theme"
   },
   pages: {
     publicErrorTitle: "Error",

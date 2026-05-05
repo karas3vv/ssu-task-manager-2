@@ -22,8 +22,7 @@ export function DashboardShell({ children, locale }: DashboardShellProps): JSX.E
     { href: `/${locale}/dashboard/tasks`, label: t.common.tasks },
     { href: `/${locale}/dashboard/projects`, label: t.common.projects },
     { href: `/${locale}/dashboard/calendar`, label: t.common.calendar },
-    { href: `/${locale}/dashboard/team`, label: t.common.team },
-    { href: `/${locale}/dashboard/settings`, label: t.common.settings }
+    { href: `/${locale}/dashboard/team`, label: t.common.team }
   ];
 
   async function handleLogout(): Promise<void> {
@@ -50,7 +49,7 @@ export function DashboardShell({ children, locale }: DashboardShellProps): JSX.E
           <button
             className="button"
             type="button"
-            title={t.settingsBoard.themeTitle}
+            title={t.theme.title}
             onClick={() => themeStore.setTheme(themeStore.theme === "dark" ? "light" : "dark")}
           >
             ◐
