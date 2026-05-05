@@ -13,10 +13,7 @@ export function LandingPage({ locale }: LandingPageProps): JSX.Element {
   return (
     <main className="hero">
       <div className="container">
-        <div className="topbar">
-          <Link className="brand" href={`/${locale}`}>
-            {t.common.appName}
-          </Link>
+        <div className="topbar" style={{ justifyContent: "flex-end" }}>
           <LanguageSwitcher locale={locale} />
         </div>
         <section className="hero-grid">
