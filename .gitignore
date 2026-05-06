@@ -35,6 +35,9 @@ coverage/
 .turbo/
 .vercel/
 .cache/
+__pycache__/
+backend/data.json
+backend/*.tmp
 
 # OS and editor files
 .DS_Store

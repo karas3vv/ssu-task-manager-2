@@ -34,6 +34,24 @@ export class AuthStore {
     this.user = profile;
   }
 
+  async loadProfile(): Promise<void> {
+    this.status = "loading";
+    this.error = null;
+
+    try {
+      const profile = await taskManagerApi.getProfile();
+      runInAction(() => {
+        this.user = profile;
+        this.status = "success";
+      });
+    } catch (error) {
+      runInAction(() => {
+        this.error = error instanceof Error ? error.message : "Не удалось загрузить профиль";
+        this.status = "error";
+      });
+    }
+  }
+
   async updateProfile(payload: UpdateProfilePayload): Promise<void> {
     this.saveStatus = "loading";
     this.saveMessage = null;
@@ -123,7 +141,7 @@ export class TaskStore {
   }
 
   async loadTasks(): Promise<void> {
-    if (this.status === "loading" || this.tasks.length > 0) {
+    if (this.status === "loading") {
       return;
     }
 
@@ -204,7 +222,7 @@ export class ProjectStore {
   }
 
   async loadProjects(): Promise<void> {
-    if (this.status === "loading" || this.projects.length > 0) {
+    if (this.status === "loading") {
       return;
     }
 

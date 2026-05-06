@@ -47,7 +47,20 @@ export const ProfileEditor = observer(function ProfileEditor({
 
   useEffect(() => {
     authStore.hydrateProfile(initialProfile);
+    void authStore.loadProfile();
   }, [authStore, initialProfile]);
+
+  useEffect(() => {
+    setForm({
+      name: profile.name,
+      email: profile.email,
+      role: profile.role,
+      avatarColor: profile.avatarColor,
+      position: profile.position,
+      workspaceName: profile.workspaceName,
+      notifications: profile.notifications
+    });
+  }, [profile]);
 
   function updateField(field: keyof Omit<UpdateProfilePayload, "notifications">, value: string): void {
     setForm((currentForm) => ({

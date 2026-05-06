@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "backend": "python3 backend/server.py",
+    "dev:all": "node scripts/dev-all.js",
+    "prod:all": "node scripts/prod-all.js",
     "build": "next build",
     "start": "next start",
     "test": "tsc --noEmit"
