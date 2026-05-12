@@ -1,0 +1,203 @@
+{
+  "metadata": {
+    "title": "TaskFlow - менеджер задач",
+    "description": "TaskFlow помогает планировать задачи, проекты и работу команды.",
+    "loginTitle": "Авторизация",
+    "loginDescription": "Вход в личный кабинет TaskFlow.",
+    "registerTitle": "Регистрация",
+    "registerDescription": "Создание аккаунта TaskFlow.",
+    "dashboardTitle": "Личный кабинет",
+    "dashboardDescription": "Профиль пользователя и краткая сводка TaskFlow.",
+    "tasksTitle": "Задачи",
+    "tasksDescription": "CSR-доска задач с обновлением статусов.",
+    "projectsTitle": "Проекты",
+    "projectsDescription": "Список проектов task-manager.",
+    "calendarTitle": "Календарь",
+    "calendarDescription": "Календарь дедлайнов задач.",
+    "teamTitle": "Команда",
+    "teamDescription": "Участники команды TaskFlow."
+  },
+  "common": {
+    "appName": "TaskFlow",
+    "signIn": "Войти",
+    "signUp": "Регистрация",
+    "logout": "Выйти",
+    "dashboard": "Кабинет",
+    "tasks": "Задачи",
+    "projects": "Проекты",
+    "calendar": "Календарь",
+    "team": "Команда",
+    "profile": "Профиль",
+    "home": "Главная",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "edit": "Изменить",
+    "cancel": "Отмена",
+    "retry": "Повторить",
+    "loading": "Загрузка...",
+    "back": "Вернуться назад",
+    "pageNotFound": "Страница не найдена.",
+    "sectionNotFound": "Раздел не найден",
+    "deadline": "Дедлайн",
+    "title": "Название",
+    "description": "Описание",
+    "priority": "Приоритет",
+    "status": "Статус",
+    "role": "Роль",
+    "position": "Должность",
+    "workspace": "Рабочее пространство",
+    "name": "Имя",
+    "email": "Email",
+    "assignee": "Исполнитель",
+    "project": "Проект",
+    "saving": "Сохранение...",
+    "adding": "Добавление...",
+    "done": "Готово"
+  },
+  "labels": {
+    "taskStatus": {
+      "todo": "К выполнению",
+      "inProgress": "В работе",
+      "review": "На проверке",
+      "done": "Готово"
+    },
+    "taskPriority": {
+      "low": "Низкий",
+      "medium": "Средний",
+      "high": "Высокий"
+    },
+    "projectStatus": {
+      "active": "Активный",
+      "paused": "На паузе",
+      "completed": "Завершен"
+    },
+    "userRole": {
+      "owner": "Владелец",
+      "manager": "Менеджер",
+      "member": "Участник"
+    },
+    "positions": {
+      "Product manager": "Продуктовый менеджер",
+      "Design lead": "Дизайн-лид",
+      "Frontend developer": "Frontend-разработчик",
+      "Workspace owner": "Владелец пространства"
+    }
+  },
+  "landing": {
+    "title": "TaskFlow",
+    "subtitle": "Планируйте задачи, фиксируйте прогресс и держите команду в одном рабочем ритме.",
+    "cta": "Зарегистрироваться",
+    "secondary": "Войти",
+    "previewLabel": "Превью рабочего процесса",
+    "preview": {
+      "plan": {
+        "badge": "План",
+        "title": "Соберите задачи",
+        "text": "Опишите работу, назначьте дедлайн и приоритет."
+      },
+      "focus": {
+        "badge": "Фокус",
+        "title": "Видите неделю",
+        "text": "Календарь показывает, что важно сегодня и что приближается."
+      },
+      "team": {
+        "badge": "Команда",
+        "title": "Двигайтесь вместе",
+        "text": "Профили, проекты и задачи остаются в одном рабочем пространстве."
+      }
+    }
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Пароль",
+    "name": "Имя",
+    "loginTitle": "Вход в аккаунт",
+    "registerTitle": "Создание аккаунта",
+    "retryLogin": "Повторить вход",
+    "retryRegister": "Повторить регистрацию",
+    "loginError": "Ошибка входа",
+    "registerError": "Ошибка регистрации"
+  },
+  "profile": {
+    "editTitle": "Редактирование профиля",
+    "avatarColor": "Цвет аватара",
+    "chooseColor": "Выбрать цвет",
+    "color": "Цвет",
+    "notifications": "Уведомления",
+    "deadlineReminders": "Напоминать о дедлайнах",
+    "reviewUpdates": "Сообщать о задачах на ревью",
+    "dailyDigest": "Присылать ежедневную сводку",
+    "saveProfile": "Сохранить профиль",
+    "statsTasks": "Задач",
+    "statsProjects": "Проектов",
+    "statsDone": "Готово",
+    "statsDigest": "Сводка",
+    "loading": "Загрузка профиля...",
+    "error": "Ошибка профиля",
+    "notFound": "Профиль не найден"
+  },
+  "tasksBoard": {
+    "loading": "Задачи загружаются...",
+    "newTask": "Новая задача",
+    "titlePlaceholder": "Например, подготовить отчет",
+    "descriptionPlaceholder": "Что нужно сделать",
+    "addTask": "Добавить задачу",
+    "returnToWork": "Вернуть в работу",
+    "deadlinePrefix": "Дедлайн"
+  },
+  "projectsBoard": {
+    "loading": "Проекты загружаются...",
+    "newProject": "Новый проект",
+    "titlePlaceholder": "Например, запуск продукта",
+    "descriptionPlaceholder": "Что входит в проект",
+    "addProject": "Добавить проект",
+    "deadlinePrefix": "Дедлайн"
+  },
+  "teamBoard": {
+    "loading": "Команда загружается...",
+    "addMember": "Добавить участника",
+    "addToTeam": "Добавить в команду",
+    "description": "Список участников синхронизируется с обновленным профилем через store и API.",
+    "loadingPage": "Загрузка команды...",
+    "error": "Ошибка команды",
+    "notFound": "Команда не найдена"
+  },
+  "calendarBoard": {
+    "boardLabel": "Календарь задач",
+    "prioritySuffix": "приоритет",
+    "noDeadlines": "Нет дедлайнов",
+    "today": "Сегодня",
+    "todayText": "задач с дедлайном на сегодня",
+    "planned": "В плане",
+    "plannedText": "дедлайнов в ближайшие 14 дней",
+    "overdue": "Просрочено",
+    "overdueText": "незавершенных задач раньше сегодняшней даты",
+    "nextFocus": "Следующий фокус",
+    "noActiveDeadlines": "Нет активных дедлайнов.",
+    "pageDescription": "План на ближайшие две недели: дедлайны, приоритеты и быстрый фокус на следующей задаче.",
+    "loading": "Загрузка календаря...",
+    "error": "Ошибка календаря",
+    "notFound": "Календарь не найден"
+  },
+  "theme": {
+    "title": "Сменить тему"
+  },
+  "pages": {
+    "publicErrorTitle": "Ошибка",
+    "publicErrorText": "Не удалось загрузить страницу.",
+    "dashboardErrorTitle": "Критическая ошибка",
+    "dashboardErrorText": "Не удалось загрузить кабинет.",
+    "dashboardLoading": "Загрузка кабинета...",
+    "dashboardSectionNotFound": "Раздел не найден",
+    "publicLoading": "Загрузка...",
+    "projectsLoading": "Загрузка проектов...",
+    "projectsError": "Ошибка проектов",
+    "projectsNotFound": "Проекты не найдены",
+    "tasksLoading": "Загрузка задач...",
+    "tasksError": "Ошибка задач",
+    "tasksNotFound": "Задачи не найдены"
+  },
+  "language": {
+    "switch": "Сменить язык"
+  }
+}

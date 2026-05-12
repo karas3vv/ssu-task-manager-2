@@ -298,6 +298,13 @@ export class TeamStore {
   }
 
   updateMember(profile: UserProfile): void {
+    const memberExists = this.members.some((member) => member.id === profile.id);
+
+    if (!memberExists) {
+      this.members = [profile, ...this.members];
+      return;
+    }
+
     this.members = this.members.map((member) => (member.id === profile.id ? profile : member));
   }
 

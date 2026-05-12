@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { CreateTaskPayload, Task, TaskPriority, TaskStatus } from "@share/model/task";
 import { projects, users } from "@share/api/mock-db";
+import { UserProfile } from "@share/model/user";
 import { getTaskPriorityLabels, getTaskStatusLabels } from "@share/lib/display-labels";
 import { Locale } from "@share/config/i18n";
 import { messages } from "@share/i18n/messages";
@@ -16,11 +17,12 @@ type TaskBoardProps = {
 };
 
 export const TaskBoard = observer(function TaskBoard({ initialTasks, locale }: TaskBoardProps): JSX.Element {
-  const { taskStore } = useRootStore();
+  const { authStore, taskStore, teamStore } = useRootStore();
   const t = messages[locale];
   const taskPriorityLabels = getTaskPriorityLabels(locale);
   const taskStatusLabels = getTaskStatusLabels(locale);
   const visibleTasks = taskStore.tasks.length > 0 ? taskStore.tasks : initialTasks;
+  const visibleUsers = mergeCurrentProfile(teamStore.members.length > 0 ? teamStore.members : users, authStore.user);
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<CreateTaskPayload | null>(null);
   const [form, setForm] = useState<CreateTaskPayload>({
@@ -36,7 +38,9 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks, locale }: T
   useEffect(() => {
     taskStore.hydrate(initialTasks);
     void taskStore.loadTasks();
-  }, [initialTasks, taskStore]);
+    teamStore.hydrate(users);
+    void teamStore.loadTeam();
+  }, [initialTasks, taskStore, teamStore]);
 
   if (taskStore.status === "loading" && visibleTasks.length === 0) {
     return <p className="muted">{t.tasksBoard.loading}</p>;
@@ -154,7 +158,7 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks, locale }: T
               value={form.assigneeId}
               onChange={(event) => setForm((currentForm) => ({ ...currentForm, assigneeId: event.target.value }))}
             >
-              {users.map((user) => (
+              {visibleUsers.map((user) => (
                 <option key={user.id} value={user.id}>
                   {user.name}
                 </option>
@@ -262,3 +266,17 @@ export const TaskBoard = observer(function TaskBoard({ initialTasks, locale }: T
     </div>
   );
 });
+
+function mergeCurrentProfile(usersList: UserProfile[], profile: UserProfile | null): UserProfile[] {
+  if (profile === null) {
+    return usersList;
+  }
+
+  const hasProfile = usersList.some((user) => user.id === profile.id);
+
+  if (!hasProfile) {
+    return [profile, ...usersList];
+  }
+
+  return usersList.map((user) => (user.id === profile.id ? profile : user));
+}

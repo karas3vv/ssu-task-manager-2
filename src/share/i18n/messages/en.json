@@ -1,0 +1,203 @@
+{
+  "metadata": {
+    "title": "TaskFlow - task manager",
+    "description": "TaskFlow helps plan tasks, projects and team work.",
+    "loginTitle": "Authorization",
+    "loginDescription": "Sign in to your TaskFlow account.",
+    "registerTitle": "Registration",
+    "registerDescription": "Create a TaskFlow account.",
+    "dashboardTitle": "Dashboard",
+    "dashboardDescription": "User profile and TaskFlow summary.",
+    "tasksTitle": "Tasks",
+    "tasksDescription": "CSR task board with status updates.",
+    "projectsTitle": "Projects",
+    "projectsDescription": "Task manager project list.",
+    "calendarTitle": "Calendar",
+    "calendarDescription": "Task deadline calendar.",
+    "teamTitle": "Team",
+    "teamDescription": "TaskFlow team members."
+  },
+  "common": {
+    "appName": "TaskFlow",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "logout": "Log out",
+    "dashboard": "Dashboard",
+    "tasks": "Tasks",
+    "projects": "Projects",
+    "calendar": "Calendar",
+    "team": "Team",
+    "profile": "Profile",
+    "home": "Home",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "retry": "Retry",
+    "loading": "Loading...",
+    "back": "Go back",
+    "pageNotFound": "Page not found.",
+    "sectionNotFound": "Section not found",
+    "deadline": "Deadline",
+    "title": "Title",
+    "description": "Description",
+    "priority": "Priority",
+    "status": "Status",
+    "role": "Role",
+    "position": "Position",
+    "workspace": "Workspace",
+    "name": "Name",
+    "email": "Email",
+    "assignee": "Assignee",
+    "project": "Project",
+    "saving": "Saving...",
+    "adding": "Adding...",
+    "done": "Done"
+  },
+  "labels": {
+    "taskStatus": {
+      "todo": "To do",
+      "inProgress": "In progress",
+      "review": "In review",
+      "done": "Done"
+    },
+    "taskPriority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "projectStatus": {
+      "active": "Active",
+      "paused": "Paused",
+      "completed": "Completed"
+    },
+    "userRole": {
+      "owner": "Owner",
+      "manager": "Manager",
+      "member": "Member"
+    },
+    "positions": {
+      "Product manager": "Product manager",
+      "Design lead": "Design lead",
+      "Frontend developer": "Frontend developer",
+      "Workspace owner": "Workspace owner"
+    }
+  },
+  "landing": {
+    "title": "TaskFlow",
+    "subtitle": "Plan tasks, track progress and keep your team moving in one rhythm.",
+    "cta": "Create account",
+    "secondary": "Sign in",
+    "previewLabel": "Workflow preview",
+    "preview": {
+      "plan": {
+        "badge": "Plan",
+        "title": "Collect tasks",
+        "text": "Describe the work, assign a deadline and set priority."
+      },
+      "focus": {
+        "badge": "Focus",
+        "title": "See the week",
+        "text": "The calendar shows what matters today and what is coming next."
+      },
+      "team": {
+        "badge": "Team",
+        "title": "Move together",
+        "text": "Profiles, projects and tasks stay in one workspace."
+      }
+    }
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "loginTitle": "Account sign in",
+    "registerTitle": "Create account",
+    "retryLogin": "Retry sign in",
+    "retryRegister": "Retry registration",
+    "loginError": "Sign in error",
+    "registerError": "Registration error"
+  },
+  "profile": {
+    "editTitle": "Edit profile",
+    "avatarColor": "Avatar color",
+    "chooseColor": "Choose color",
+    "color": "Color",
+    "notifications": "Notifications",
+    "deadlineReminders": "Remind me about deadlines",
+    "reviewUpdates": "Notify me about review tasks",
+    "dailyDigest": "Send a daily digest",
+    "saveProfile": "Save profile",
+    "statsTasks": "Tasks",
+    "statsProjects": "Projects",
+    "statsDone": "Done",
+    "statsDigest": "Digest",
+    "loading": "Loading profile...",
+    "error": "Profile error",
+    "notFound": "Profile not found"
+  },
+  "tasksBoard": {
+    "loading": "Tasks are loading...",
+    "newTask": "New task",
+    "titlePlaceholder": "For example, prepare a report",
+    "descriptionPlaceholder": "What needs to be done",
+    "addTask": "Add task",
+    "returnToWork": "Return to work",
+    "deadlinePrefix": "Deadline"
+  },
+  "projectsBoard": {
+    "loading": "Projects are loading...",
+    "newProject": "New project",
+    "titlePlaceholder": "For example, product launch",
+    "descriptionPlaceholder": "What is included in the project",
+    "addProject": "Add project",
+    "deadlinePrefix": "Deadline"
+  },
+  "teamBoard": {
+    "loading": "Team is loading...",
+    "addMember": "Add member",
+    "addToTeam": "Add to team",
+    "description": "The member list syncs with the updated profile through the store and API.",
+    "loadingPage": "Loading team...",
+    "error": "Team error",
+    "notFound": "Team not found"
+  },
+  "calendarBoard": {
+    "boardLabel": "Task calendar",
+    "prioritySuffix": "priority",
+    "noDeadlines": "No deadlines",
+    "today": "Today",
+    "todayText": "tasks due today",
+    "planned": "Planned",
+    "plannedText": "deadlines in the next 14 days",
+    "overdue": "Overdue",
+    "overdueText": "unfinished tasks before today",
+    "nextFocus": "Next focus",
+    "noActiveDeadlines": "No active deadlines.",
+    "pageDescription": "Plan for the next two weeks: deadlines, priorities and quick focus on the next task.",
+    "loading": "Loading calendar...",
+    "error": "Calendar error",
+    "notFound": "Calendar not found"
+  },
+  "theme": {
+    "title": "Switch theme"
+  },
+  "pages": {
+    "publicErrorTitle": "Error",
+    "publicErrorText": "Failed to load the page.",
+    "dashboardErrorTitle": "Critical error",
+    "dashboardErrorText": "Failed to load the dashboard.",
+    "dashboardLoading": "Loading dashboard...",
+    "dashboardSectionNotFound": "Section not found",
+    "publicLoading": "Loading...",
+    "projectsLoading": "Loading projects...",
+    "projectsError": "Projects error",
+    "projectsNotFound": "Projects not found",
+    "tasksLoading": "Loading tasks...",
+    "tasksError": "Tasks error",
+    "tasksNotFound": "Tasks not found"
+  },
+  "language": {
+    "switch": "Switch language"
+  }
+}

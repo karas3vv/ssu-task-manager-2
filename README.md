@@ -182,7 +182,7 @@ ThemeStore
 
 ## i18n
 
-Проект использует `[locale]` routing и `next-intl`.
+Проект использует `[locale]` routing и `next-intl`. Тексты локалей вынесены в JSON-файлы, а `messages.ts` оставлен как типизированный индекс для импорта словарей в компонентах.
 
 Поддерживаемые локали:
 
@@ -195,6 +195,8 @@ en
 
 ```text
 src/share/i18n/messages.ts
+src/share/i18n/messages/ru.json
+src/share/i18n/messages/en.json
 src/share/i18n/request.ts
 src/middleware.ts
 src/share/config/i18n.ts
